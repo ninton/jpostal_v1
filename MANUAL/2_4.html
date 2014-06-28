@@ -1,0 +1,591 @@
+<html lang=ja><head>
+<meta http-equiv="Content-type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head><body><div align=center><table border=0 width=580><tr><td>
+<p><A href="index.html">J-POSTALトップ</A></p>
+
+<H2>ケーススタディ：入力欄とJ-POSTAL書式</H2>
+<P>追加スクリプト作成ユーティリティ(jpostal_parent_wizard.html)を使う場合は、通常は読む必要はありません。<BR><BR>ここではいろいろな住所入力フォームを例にあげて、入力欄とJ-POSTAL書式を設定するスクリプトについて説明します。<BR></P>
+<UL>
+  <LI>ケース1. 郵便番号の入力欄が１個の場合(1) 
+  <LI>ケース2. 郵便番号の入力欄が１個の場合(2) 
+  <LI>ケース3. 都道府県がテキストボックスの場合 
+  <LI>ケース4. 都道府県の&lt;option&gt;のvalue属性について 
+  <LI>ケース5. 市区町村から番地まで、１つの入力欄の場合 
+  <LI>ケース6. 大口事業所の番地、名称を利用する場合</LI></UL>
+<P>J-POSTALの郵便データ書式を次に示します。</P>
+<TABLE cellSpacing=0 cellPadding=1 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD>図0. J-POSTALの郵便データ書式</TD></TR>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=1 border=1>
+        <TBODY>
+        <TR>
+          <TD>書式</TD>
+          <TD>意味</TD>
+          <TD>都道府県データの<BR>入力内容の例</TD>
+          <TD>大口事業所の<BR>入力内容の例</TD></TR>
+        <TR>
+          <TD>%0 </TD>
+          <TD>郵便番号の上位３桁</TD>
+          <TD>100</TD>
+          <TD>100</TD></TR>
+        <TR>
+          <TD>%1 </TD>
+          <TD>郵便番号の下位４桁</TD>
+          <TD>0001</TD>
+          <TD>0001</TD></TR>
+        <TR>
+          <TD>%2 </TD>
+          <TD>都道府県</TD>
+          <TD>東京都</TD>
+          <TD>東京都</TD></TR>
+        <TR>
+          <TD>%3 </TD>
+          <TD>市区町村</TD>
+          <TD>千代田区</TD>
+          <TD>千代田区</TD></TR>
+        <TR>
+          <TD>%4 </TD>
+          <TD>町域</TD>
+          <TD>千代田</TD>
+          <TD>千代田</TD></TR>
+        <TR>
+          <TD>%5 </TD>
+          <TD>丁目、番地 (大口事業所のみ)</TD>
+          <TD>　</TD>
+          <TD>１－１</TD></TR>
+        <TR>
+          <TD>%6 </TD>
+          <TD>大口事業所名称 (大口事業所のみ)</TD>
+          <TD>　</TD>
+          <TD>宮内庁</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P></P>
+<HR>
+
+<P></P>
+<H3>ケース1. 郵便番号の入力欄が１個の場合(1)</H3>
+<P>郵便番号の入力欄が１個で、上３桁と下４桁をハイフンで分ける場合です。<BR><BR>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図1-1. 住所入力フォーム</TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=1 border=1>
+              <TBODY>
+              <TR>
+                <TD>住所入力<BR>郵便番号 [100-0001]<BR>住所１&nbsp;[東京都]▼<BR>住所２ 
+                  [千代田区　　　　]<BR>住所３ [千代田　　　　　]<BR>住所４ [　　　　　　　　　]<BR>名　称 
+                  [　　　　　　　　　]<BR>【応募】</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD>
+    <TD rowSpan=2>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図1-2. HTMLソース</TD></TR>
+        <TR>
+          <TD><PRE> 1: &lt;html&gt;&lt;head&gt;
+ 2: &lt;/head&gt;&lt;body&gt;
+ 3: &lt;form action="../cgi-bin/regist.cgi" method=POST&gt;
+ 4: 住所入力&lt;br&gt;
+ 5: 
+ 6: <STRONG>郵便番号</STRONG> &lt;input name=<FONT color=#ff0000><STRONG>postcode</STRONG></FONT>&gt;&lt;br&gt;
+ 7: 
+ 8: <STRONG>住所１</STRONG>
+ 9: &lt;select name=<STRONG><FONT color=#ff0000>address1</FONT></STRONG>&gt;
+10: &lt;option value="" selected&gt;選択してください 
+11: &lt;option value="北海道"&gt;北海道<BR>～中略～
+58: &lt;/select&gt;&lt;br&gt;
+59: 
+60: <STRONG>住所２</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address2</FONT></STRONG>&gt;&lt;br&gt;
+61: <STRONG>住所３</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address3</FONT></STRONG>&gt;&lt;br&gt;
+62: 住所４ &lt;input name=<FONT color=#000000>address4</FONT>&gt;&lt;br&gt;
+63: 名　称 &lt;input name=<FONT color=#000000>address5</FONT>&gt;&lt;br&gt;
+64: 
+65: &lt;input type=submit value="応募"&gt;
+66: &lt;/form&gt;
+67: &lt;/body&gt;&lt;/html&gt;</PRE></TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図1-3.入力欄とname属性</TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=1 border=1>
+              <TBODY>
+              <TR>
+                <TD>
+                  <P align=center>入力欄</P></TD>
+                <TD>
+                  <P align=center>name属性</P></TD>
+                <TD>
+                  <P align=center>入力内容</P></TD>
+                <TD>
+                  <P align=center>書式</P></TD></TR>
+              <TR>
+                <TD>郵便番号</TD>
+                <TD>postcode</TD>
+                <TD>100-0001</TD>
+                <TD>%0-%1</TD></TR>
+              <TR>
+                <TD>住所１</TD>
+                <TD>address1</TD>
+                <TD>東京都</TD>
+                <TD>%2</TD></TR>
+              <TR>
+                <TD>住所２</TD>
+                <TD>address2</TD>
+                <TD>千代田区</TD>
+                <TD>%3</TD></TR>
+              <TR>
+                <TD>住所３</TD>
+                <TD>address3</TD>
+                <TD>千代田</TD>
+                <TD>%4</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>図1-4. 入力欄のname属性と書式の設定スクリプト</TD></TR>
+  <TR>
+    <TD><PRE>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>postcode</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%0-%1</FONT></STRONG>';<BR><BR>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address1</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%2</FONT></STRONG>';
+jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address2</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%3</FONT></STRONG>';
+jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address3</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%4</FONT></STRONG>';
+</PRE></TD></TR></TBODY></TABLE>
+<HR>
+
+<H3>ケース2. 郵便番号の入力欄が１個の場合(2)</H3>
+<P>郵便番号の入力欄が１個で、7桁連続で入力する場合です。</P>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図2-1. 住所入力フォーム</TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=1 border=1>
+              <TBODY>
+              <TR>
+                <TD>住所入力<BR>郵便番号 [1000001]<BR>住所１&nbsp;[東京都]▼<BR>住所２ 
+                  [千代田区　　　　]<BR>住所３ [千代田　　　　　]<BR>住所４ [　　　　　　　　　]<BR>名　称 
+                  [　　　　　　　　　]<BR>【応募】</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD>
+    <TD rowSpan=2>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図2-2. HTMLソース</TD></TR>
+        <TR>
+          <TD><PRE> 1: &lt;html&gt;&lt;head&gt;
+ 2: &lt;/head&gt;&lt;body&gt;
+ 3: &lt;form action="../cgi-bin/regist.cgi" method=POST&gt;
+ 4: 住所入力&lt;br&gt;
+ 5: 
+ 6: <STRONG>郵便番号</STRONG> &lt;input name=<FONT color=#ff0000><STRONG>postcode</STRONG></FONT>&gt;&lt;br&gt;
+ 7: 
+ 8: <STRONG>住所１</STRONG>
+ 9: &lt;select name=<STRONG><FONT color=#ff0000>address1</FONT></STRONG>&gt;
+10: &lt;option value="" selected&gt;選択してください 
+11: &lt;option value="北海道"&gt;北海道<BR>～中略～
+58: &lt;/select&gt;&lt;br&gt;
+59: 
+60: <STRONG>住所２</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address2</FONT></STRONG>&gt;&lt;br&gt;
+61: <STRONG>住所３</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address3</FONT></STRONG>&gt;&lt;br&gt;
+62: 住所４ &lt;input name=<FONT color=#000000>address4</FONT>&gt;&lt;br&gt;
+63: 名　称 &lt;input name=<FONT color=#000000>address5</FONT>&gt;&lt;br&gt;
+64: 
+65: &lt;input type=submit value="応募"&gt;
+66: &lt;/form&gt;
+67: &lt;/body&gt;&lt;/html&gt;</PRE></TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図2-3.入力欄とname属性</TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=1 border=1>
+              <TBODY>
+              <TR>
+                <TD>
+                  <P align=center>入力欄</P></TD>
+                <TD>
+                  <P align=center>name属性</P></TD>
+                <TD>
+                  <P align=center>入力内容</P></TD>
+                <TD>
+                  <P align=center>書式</P></TD></TR>
+              <TR>
+                <TD>郵便番号</TD>
+                <TD>postcode</TD>
+                <TD>1000001</TD>
+                <TD>%0%1</TD></TR>
+              <TR>
+                <TD>住所１</TD>
+                <TD>address1</TD>
+                <TD>東京都</TD>
+                <TD>%2</TD></TR>
+              <TR>
+                <TD>住所２</TD>
+                <TD>address2</TD>
+                <TD>千代田区</TD>
+                <TD>%3</TD></TR>
+              <TR>
+                <TD>住所３</TD>
+                <TD>address3</TD>
+                <TD>千代田</TD>
+                <TD>%4</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P></P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>図2-4. 入力欄のname属性と書式の設定スクリプト</TD></TR>
+  <TR>
+    <TD><PRE>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>postcode</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%0%1</FONT></STRONG>';<BR><BR>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address1</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%2</FONT></STRONG>';
+jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address2</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%3</FONT></STRONG>';
+jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address3</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%4</FONT></STRONG>';
+</PRE></TD></TR></TBODY></TABLE>
+<HR width="100%" noShade SIZE=1>
+
+<H3>ケース3. 都道府県がテキストボックスの場合</H3>
+<P>都道府県の入力欄がテキストボックス（&lt;input 
+type=text&gt;）、プルダウンメニュー（&lt;select&gt;）いずれの場合でも、設定方法は同じです。</P>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図3-1. 住所入力フォーム</TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=1 border=1>
+              <TBODY>
+              <TR>
+                <TD>住所入力<BR>郵便番号 [100]-[0001]<BR>住所１&nbsp;[東京都]<BR>住所２ 
+                  [千代田区　　　　]<BR>住所３ [千代田　　　　　]<BR>住所４ [　　　　　　　　　]<BR>名　称 
+                  [　　　　　　　　　]<BR>【応募】</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD>
+    <TD rowSpan=2>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図3-2. HTMLソース</TD></TR>
+        <TR>
+          <TD><PRE> 1: &lt;html&gt;&lt;head&gt;
+ 2: &lt;/head&gt;&lt;body&gt;
+ 3: &lt;form action="../cgi-bin/regist.cgi" method=POST&gt;
+ 4: 住所入力&lt;br&gt;
+ 5: 
+ 6: <STRONG>郵便番号</STRONG> &lt;input name=<FONT color=#ff0000><STRONG>postcode1</STRONG></FONT>&gt;-&lt;input name=<FONT color=#ff0000><STRONG>postcode2</STRONG></FONT>&gt;&lt;br&gt;
+ 7: 
+ 8: <STRONG>住所１</STRONG>
+ 9: &lt;input name=<STRONG><FONT color=#ff0000>address1</FONT></STRONG>&gt;&lt;br&gt;
+～中略～
+60: <STRONG>住所２</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address2</FONT></STRONG>&gt;&lt;br&gt;
+61: <STRONG>住所３</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address3</FONT></STRONG>&gt;&lt;br&gt;
+62: 住所４ &lt;input name=<FONT color=#000000>address4</FONT>&gt;&lt;br&gt;
+63: 名　称 &lt;input name=<FONT color=#000000>address5</FONT>&gt;&lt;br&gt;
+64: 
+65: &lt;input type=submit value="応募"&gt;
+66: &lt;/form&gt;
+67: &lt;/body&gt;&lt;/html&gt;</PRE></TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図3-3.入力欄とname属性</TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=1 border=1>
+              <TBODY>
+              <TR>
+                <TD>
+                  <P align=center>入力欄</P></TD>
+                <TD>
+                  <P align=center>name属性</P></TD>
+                <TD>
+                  <P align=center>入力内容</P></TD>
+                <TD>
+                  <P align=center>書式</P></TD></TR>
+              <TR>
+                <TD>郵便番号<BR>(上3桁)</TD>
+                <TD>postcode1</TD>
+                <TD>100</TD>
+                <TD>%0</TD></TR>
+              <TR>
+                <TD>郵便番号<BR>(下4桁)</TD>
+                <TD>postcode2</TD>
+                <TD>0001</TD>
+                <TD>%1</TD></TR>
+              <TR>
+                <TD>住所１</TD>
+                <TD>address1</TD>
+                <TD>東京都</TD>
+                <TD>%2</TD></TR>
+              <TR>
+                <TD>住所２</TD>
+                <TD>address2</TD>
+                <TD>千代田区</TD>
+                <TD>%3</TD></TR>
+              <TR>
+                <TD>住所３</TD>
+                <TD>address3</TD>
+                <TD>千代田</TD>
+                <TD>%4</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P></P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>図3-4. 入力欄のname属性と書式の設定スクリプト</TD></TR>
+  <TR>
+    <TD><PRE>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>postcode</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%0%1</FONT></STRONG>';<BR><BR>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address1</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%2</FONT></STRONG>';
+jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address2</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%3</FONT></STRONG>';
+jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address3</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%4</FONT></STRONG>';
+</PRE></TD></TR></TBODY></TABLE>
+<HR width="100%" noShade SIZE=1>
+
+<H3>ケース4. 都道府県の&lt;option&gt;のvalue属性について</H3>
+<P>J-POSTALは、都道府県に <STRONG>東京都</STRONG> 
+を自動入力する場合、住所入力フォームの都道府県一覧アイテムから東京都のアイテムを探します。その際、次の順序で一致するアイテムを探します。<BR><BR>1. 
+&lt;option&gt;タグのvalue属性が 東京都 (※1)</P><PRE>&lt;option value="<STRONG>東京都</STRONG>"&gt;？？？<BR></PRE>
+<P>2. &lt;option&gt;タグのtext属性が 東京都 (※2)</P><PRE>&lt;option value="??"&gt;<STRONG>東京都</STRONG><BR></PRE>
+<P>3. &lt;option&gt;タグのvalue属性が 東京 (※3)</P><PRE>&lt;option value="<STRONG>東京</STRONG>"&gt;？？？<BR></PRE>
+<P>4. &lt;option&gt;タグのtext属性が 東京 (※3)</P><PRE>&lt;option value="??"&gt;<STRONG>東京</STRONG><BR></PRE>
+<P><BR>※1 広く使われている方法です。<BR>※2 valueに運用システム特有の都道府県IDを設定することも少なくありません。<BR>※3 
+まれですが、「都」「府」「県」を省略した都道府県一覧を見かけることがあります。</P>
+<P>
+<HR width="100%" noShade SIZE=1>
+
+<P></P>
+<H3>ケース5. 市区町村から番地まで、１つの入力欄の場合</H3>
+<P>市区町村、町域、番地まで一つの入力欄（図5-1 の住所２）に入力する場合です。市区町村を表す書式 %3、町域を表す書式 %4 を並べて、'%3%4' 
+と設定します。(図5-4)</P>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図5-1. 住所入力フォーム</TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=1 border=1>
+              <TBODY>
+              <TR>
+                <TD>住所入力<BR>郵便番号 [100]-[0001]<BR>住所１&nbsp;[東京都]▼<BR>住所２ 
+                  [千代田区千代田　　　]<BR>名　称 
+        [　　　　　　　　　]<BR>【応募】</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD>
+    <TD rowSpan=2>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図5-2. HTMLソース 編集前</TD></TR>
+        <TR>
+          <TD><PRE> 1: &lt;html&gt;&lt;head&gt;
+ 2: &lt;/head&gt;&lt;body&gt;
+ 3: &lt;form action="../cgi-bin/regist.cgi" method=POST&gt;
+ 4: 住所入力&lt;br&gt;
+ 5: 
+ 6: <STRONG>郵便番号</STRONG> &lt;input name=<FONT color=#ff0000><STRONG>postcode1</STRONG></FONT>&gt;-&lt;input name=<FONT color=#ff0000><STRONG>postcode2</STRONG></FONT>&gt;&lt;br&gt;
+ 7: 
+ 8: <STRONG>住所１</STRONG>
+ 9: &lt;select name=<STRONG><FONT color=#ff0000>address1</FONT></STRONG>&gt;
+10: &lt;option value="" selected&gt;選択してください 
+11: &lt;option value="北海道"&gt;北海道<BR>～中略～
+58: &lt;/select&gt;&lt;br&gt;
+59: 
+60: <STRONG>住所２</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address2</FONT></STRONG>&gt;&lt;br&gt;
+61: 名　称 &lt;input name=<FONT color=#000000>address5</FONT>&gt;&lt;br&gt;
+62: 
+63: &lt;input type=submit value="応募"&gt;
+64: &lt;/form&gt;
+65: &lt;/body&gt;&lt;/html&gt;</PRE></TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図5-3.入力欄とname属性</TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=1 border=1>
+              <TBODY>
+              <TR>
+                <TD>
+                  <P align=center>入力欄</P></TD>
+                <TD>
+                  <P align=center>name属性</P></TD>
+                <TD>
+                  <P align=center>入力内容</P></TD>
+                <TD>
+                  <P align=center>書式</P></TD></TR>
+              <TR>
+                <TD>郵便番号<BR>(上3桁)</TD>
+                <TD>postcode1</TD>
+                <TD>100</TD>
+                <TD>%0</TD></TR>
+              <TR>
+                <TD>郵便番号<BR>(下4桁)</TD>
+                <TD>postcode2</TD>
+                <TD>0001</TD>
+                <TD>%1</TD></TR>
+              <TR>
+                <TD>住所１</TD>
+                <TD>address1</TD>
+                <TD>東京都</TD>
+                <TD>%2</TD></TR>
+              <TR>
+                <TD>住所２</TD>
+                <TD>address2</TD>
+                <TD>千代田区千代田</TD>
+                <TD>%3%4</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P></P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>図5-4. 入力欄のname属性と書式の設定スクリプト</TD></TR>
+  <TR>
+    <TD><PRE>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>postcode</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%0%1</FONT></STRONG>';<BR><BR>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address1</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%2</FONT></STRONG>';
+jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address2</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%3%4</FONT></STRONG>';
+</PRE></TD></TR></TBODY></TABLE>
+<HR width="100%" noShade SIZE=1>
+
+<H3>ケース6. 大口事業所の番地、名称を利用する場合</H3>
+<P>J-PSOTALは大口事業所の郵便データを持っています。大口事業所データの入力欄と書式について考えるときは、「100-8111 
+東京都千代田区千代田１－１宮内庁」を入力します。</P>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図6-1. 住所入力フォーム</TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=1 border=1>
+              <TBODY>
+              <TR>
+                <TD>住所入力<BR>郵便番号 [100]-[8111]<BR>住所１&nbsp;[東京都]▼<BR>住所２ 
+                  [千代田区　　　　]<BR>住所３ [千代田　　　　　]<BR>住所４ [１－１　　　　　　]<BR>名　称 
+                  [宮内庁　　　　　]<BR>【応募】</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD>
+    <TD rowSpan=2>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図6-2. HTMLソース 編集前</TD></TR>
+        <TR>
+          <TD><PRE> 1: &lt;html&gt;&lt;head&gt;
+ 2: &lt;/head&gt;&lt;body&gt;
+ 3: &lt;form action="../cgi-bin/regist.cgi" method=POST&gt;
+ 4: 住所入力&lt;br&gt;
+ 5: 
+ 6: <STRONG>郵便番号</STRONG> &lt;input name=<FONT color=#ff0000><STRONG>postcode1</STRONG></FONT>&gt;-&lt;input name=<FONT color=#ff0000><STRONG>postcode2</STRONG></FONT>&gt;&lt;br&gt;
+ 7: 
+ 8: <STRONG>住所１</STRONG>
+ 9: &lt;select name=<STRONG><FONT color=#ff0000>address1</FONT></STRONG>&gt;
+10: &lt;option value="" selected&gt;選択してください 
+11: &lt;option value="北海道"&gt;北海道<BR>～中略～
+58: &lt;/select&gt;&lt;br&gt;
+59: 
+60: <STRONG>住所２</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address2</FONT></STRONG>&gt;&lt;br&gt;
+61: <STRONG>住所３</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address3</FONT></STRONG>&gt;&lt;br&gt;
+62: <STRONG>住所４</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address4</FONT></STRONG>&gt;&lt;br&gt;
+63: <STRONG>名　称</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address5</FONT></STRONG>&gt;&lt;br&gt;
+64: 
+65: &lt;input type=submit value="応募"&gt;
+66: &lt;/form&gt;
+67: &lt;/body&gt;&lt;/html&gt;</PRE></TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=1 border=0>
+        <TBODY>
+        <TR>
+          <TD>図6-3.入力欄とname属性</TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=1 border=1>
+              <TBODY>
+              <TR>
+                <TD>
+                  <P align=center>入力欄</P></TD>
+                <TD>
+                  <P align=center>name属性</P></TD>
+                <TD>
+                  <P align=center>入力内容</P></TD>
+                <TD>
+                  <P align=center>書式</P></TD></TR>
+              <TR>
+                <TD>郵便番号<BR>(上3桁)</TD>
+                <TD>postcode1</TD>
+                <TD>100</TD>
+                <TD>%0</TD></TR>
+              <TR>
+                <TD>郵便番号<BR>(下4桁)</TD>
+                <TD>postcode2</TD>
+                <TD>0001</TD>
+                <TD>%1</TD></TR>
+              <TR>
+                <TD>住所１</TD>
+                <TD>address1</TD>
+                <TD>東京都</TD>
+                <TD>%2</TD></TR>
+              <TR>
+                <TD>住所２</TD>
+                <TD>address2</TD>
+                <TD>千代田区</TD>
+                <TD>%3</TD></TR>
+              <TR>
+                <TD>住所３</TD>
+                <TD>address3</TD>
+                <TD>千代田</TD>
+                <TD>%4</TD></TR>
+              <TR>
+                <TD>住所４</TD>
+                <TD>address4</TD>
+                <TD>１－１</TD>
+                <TD>%5</TD></TR>
+              <TR>
+                <TD>名称</TD>
+                <TD>address5</TD>
+                <TD>宮内庁</TD>
+                <TD>%6</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<P></P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>図6-4. 
+      入力欄のname属性と書式の設定スクリプト<BR>大口事業所データはデフォルトでは無効なので、JIGYOSYOプロパティを１にして有効にします。</TD></TR>
+  <TR>
+    <TD><PRE>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>postcode1</FONT></STRONG> = '<STRONG><FONT color=#ff0000>%0</FONT></STRONG>';<BR><BR>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>postcode2</FONT></STRONG> = '<STRONG><FONT color=#ff0000>%1</FONT></STRONG>';<BR>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address1</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%2</FONT></STRONG>';
+jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address2</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%3</FONT></STRONG>';
+jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address3</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%4</FONT></STRONG>';<BR>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address4</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%5</FONT></STRONG>';<BR>jpp_obj.ELEMENT_FORMAT.<STRONG><FONT color=#ff0000>address5</FONT></STRONG>  = '<STRONG><FONT color=#ff0000>%6</FONT></STRONG>';<BR><BR> <BR><STRONG><FONT color=#ff0000>jpp_obj.JIGYOSYO = 1;</FONT></STRONG>
+</PRE></TD></TR></TBODY></TABLE>
+
+
+
+<p><A href="index.html">J-POSTALトップ</A></p>
+<hr>
+
+<div class=footer
+>Copyright &copy; 1999-2014 Ninton G.K. , All rights reserved.<br
+></div>
+
+</td></tr></table>
+
+
+</div></body></html>

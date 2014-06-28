@@ -1,0 +1,95 @@
+<html lang=ja><head>
+<meta http-equiv="Content-type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head><body><div align=center><table border=0 width=580><tr><td>
+<p><A href="index.html">J-POSTALトップ</A></p>
+
+<H2>ステップ０：設置作業の概要</H2>
+<P>J-POSTALの設置作業の概要を説明します。架空のWebサイト <STRONG>http://myserver/mysite/</STRONG> 
+に設置する様子を追いながら説明します。ディレクトリ名やファイル名は、実際の環境に合わせて読み替えてください。</P>
+<UL>
+  <LI>0.1 J-POSTALの配布ディレクトリ構成 
+  <LI>0.2 Webサイトの作業前の状態 
+  <LI>0.3 Webサイトの作業後の状態 
+  <LI>0.4 設置場所の条件 
+  <LI>0.5 ３つの要素の位置関係</LI></UL>
+<H3>0.1 J-POSTALの配布ディレクトリ構成</H3>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" background="" border=1>
+  <TBODY>
+  <TR>
+    <TD width="50%"><IMG height=16 alt=* src="images/folder.gif" width=16>jpostal-1.2<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16><STRONG>jpostal</STRONG><STRONG><BR>　　<IMG height=16 alt=* src="images/file.gif" width=16>*.*<BR>　　　<IMG height=16 alt=* src="images/folder.gif" width=16>datajs<BR>　　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.js<BR>　　　<IMG height=16 alt=* src="images/folder.gif" width=16>sample<BR>　　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.html<BR></STRONG>　<IMG height=16 alt=* src="images/folder.gif" width=16>MANUAL<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>UTILS</TD>
+    <TD width="50%">
+      <DL>
+        <DT><STRONG><IMG height=16 alt=* src="images/folder.gif" width=16>jpostal</STRONG> 
+        <DD>ステップ１でWebサーバーにアップロードします。<STRONG><IMG height=16 alt=* src="images/folder.gif" width=16>jpostal</STRONG>下のディレクトリ構成やファイル名は変更しません。 
+
+        <DT>その他 
+        <DD><IMG height=16 alt=* src="images/folder.gif" width=16>MANUAL、<IMG height=16 alt=* src="images/folder.gif" width=16>UTILS 
+        はアップロードしません。 </DD></DL></TD></TR></TBODY></TABLE>
+<DIV class=figtitle>図0-1 J-POSTALの配布ディレクトリ構成</DIV>
+<H3>0.2 Webサイトの作業前の状態</H3>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" background="" border=1>
+  <TBODY>
+  <TR>
+    <TD width="50%">http://myserver/mysite/ 　<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>mycorner/<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16><STRONG>input.html<BR></STRONG>　<IMG height=16 alt=* src="images/folder.gif" width=16>cgi-bin/<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16><STRONG>regist.cgi</STRONG></TD>
+    <TD width="50%">
+      <DL>
+        <DT><STRONG><IMG height=16 alt=* src="images/file.gif" width=16>input.html</STRONG> 
+        <DD>住所入力フォーム 
+        <DT><STRONG><IMG height=16 alt=* src="images/file.gif" width=16>regist.cgi</STRONG> 
+        <DD>送信先CGI </DD></DL></TD></TR></TBODY></TABLE>
+<DIV align=center><STRONG>図0-2 Webサイトの作業前の状態</STRONG></DIV>
+<H3>0.3 Webサイトの作業後の状態</H3>
+<P>設置場所は比較的自由ですが、次の配置にしてみます。</P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" background="" border=1>
+  <TBODY>
+  <TR>
+    <TD width="50%">http://myserver/mysite/ 　<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>mycorner/<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16><STRONG>input.html　　　　 
+      </STRONG>→ステップ３<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16><STRONG>jpostal_child.html　</STRONG>→ステップ２<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>cgi-bin/<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16>regist.cgi<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16><STRONG>jpostal/　　　　　　　</STRONG>→ステップ１<BR><STRONG>　　<IMG height=16 alt=* src="images/file.gif" width=16>*.*<BR>　　<IMG height=16 alt=* src="images/folder.gif" width=16>datajs/<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.js<BR>　　<IMG height=16 alt=* src="images/folder.gif" width=16>sample/<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.html</STRONG></TD>
+    <TD width="50%">
+      <TABLE cellSpacing=0 cellPadding=3 border=0>
+        <TBODY>
+        <TR>
+          <TD>ステップ１：</TD>
+          <TD><IMG height=16 alt=* src="images/folder.gif" width=16>jpsotal/ のアップロード</TD></TR>
+        <TR>
+          <TD>ステップ２：</TD>
+          <TD>子ウィンドウ <IMG height=16 alt=* src="images/file.gif" width=16>jpostal_child.html の編集</TD></TR>
+        <TR>
+          <TD>ステップ３：</TD>
+          <TD>住所入力フォーム <IMG height=16 alt=* src="images/file.gif" width=16>input.html 
+  の編集</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<DIV class=figtitle>図0-3 Webサイトの作業後の状態</DIV>
+<H3>0.4 設置場所の条件</H3>
+<P>「<IMG height=16 alt=* src="images/file.gif" width=16>住所入力フォーム」と「<IMG height=16 alt=* src="images/file.gif" width=16>子ウィンドウ」が同じHTTPホスト上にあること</STRONG>、です。これはWebブラウザのセキュリティ設定の制限です。<BR><BR>問題となるケースとしてレンタルアンケートが考えられます。アンケートフォームを表示するWebサーバーに、ユーザーのHTMLファイルを設置する手段がない場合、J-POSTALを使うことはできません。<BR><BR>「<IMG height=16 alt=* src="images/file.gif" width=16>住所入力フォームおよび<IMG height=16 alt=* src="images/file.gif" width=16>子ウィンドウ」と、「<IMG height=16 alt=* src="images/folder.gif" width=16>jpostal」は、異なるHTTPホスト上に設置可能です。</P>
+<H3>0.5 ３つの要素の位置関係</H3>
+<P>「<IMG height=16 alt=* src="images/file.gif" width=16>住所入力フォーム」、「<IMG height=16 alt=* src="images/file.gif" width=16>子ウィンドウ」、「<IMG height=16 alt=* src="images/folder.gif" width=16>jpostal」の位置関係が重要です。実際の環境に合わせて、相対パスを調べてください。</P>
+<TABLE cellSpacing=0 cellPadding=3 border=1>
+  <TBODY>
+  <TR>
+    <TD>位置関係</TD>
+    <TD>図３での相対パス</TD></TR>
+  <TR>
+    <TD><IMG height=16 alt=* src="images/file.gif" width=16>住所入力フォームから見た、<IMG height=16 alt=* src="images/folder.gif" width=16>jpostal/</TD>
+    <TD>../jpostal/</TD></TR>
+  <TR>
+    <TD><IMG height=16 alt=* src="images/file.gif" width=16>住所入力フォームから見た、<IMG height=16 alt=* src="images/file.gif" width=16>子ウィンドウ</TD>
+    <TD>./jpostal_child.html</TD></TR>
+  <TR>
+    <TD><IMG height=16 alt=* src="images/file.gif" width=16>子ウィンドウから見た、<IMG height=16 alt=* src="images/folder.gif" width=16>jpsota/</TD>
+    <TD>../jpostal/</TD></TR></TBODY></TABLE>
+<DIV class=figtitle>図0-4 ３つの要素の位置関係</DIV>
+
+
+<p><A href="index.html">J-POSTALトップ</A></p>
+<hr>
+
+<div class=footer
+>Copyright &copy; 1999-2014 Ninton G.K. , All rights reserved.<br
+></div>
+
+</td></tr></table>
+
+
+</div></body></html>

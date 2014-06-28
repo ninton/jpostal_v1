@@ -1,0 +1,65 @@
+<html lang=ja><head>
+<meta http-equiv="Content-type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head><body><div align=center><table border=0 width=580><tr><td>
+<p><A href="index.html">J-POSTALトップ</A></p>
+
+
+<H2>エラーメッセージ</H2>
+<P>子ウィンドウに表示されるエラーメッセージについて説明します。配布状態のjpostal_child.htmlはエラーメッセージを赤字で表示します。JPOSTAL_CHILD_OオブジェクトのERRORプロパティ、ERROR_MESSAGEプロパティも参照してください。</P>
+<TABLE cellSpacing=0 cellPadding=5 border=1>
+  <TBODY>
+  <TR>
+    <TH>エラー番号<BR>(ERRORプロパティ)</TH>
+    <TD>
+      <P align=center><STRONG>エラーメッセージ<BR>(ERROR_MESSAGEプロパティ)</STRONG></P></TD>
+    <TH>備考</TH></TR>
+  <TR>
+    <TD>0</TD>
+    <TD>正常終了</TD>
+    <TD>通常は表示されません</TD></TR>
+  <TR>
+    <TD>1</TD>
+    <TD>郵便番号が見つかりませんでした </TD>
+    <TD>　</TD></TR>
+  <TR>
+    <TD>2</TD>
+    <TD>郵便番号に数字以外の文字があります</TD>
+    <TD>半角の数字、ハイフン以外の文字があります。全角数字、'－', 'ー' は、J-POSTAL内部で半角文字に変換されます。</TD></TR>
+  <TR>
+    <TD>3</TD>
+    <TD>郵便番号が3桁未満です</TD>
+    <TD>デフォルトは最低3桁の入力が必要です。7桁全ての入力を強制する場合は、プロパティ MINLEN を 7に設定します。</TD></TR>
+  <TR>
+    <TD>4</TD>
+    <TD>郵便番号が7桁を超えています</TD>
+    <TD>　</TD></TR>
+  <TR>
+    <TD>5</TD>
+    <TD>郵便データファイルが見つかりません</TD>
+    <TD>原因として jposta/datajs/*.js をアップロードしていない、&lt;SCRIPT&gt;タグSRC属性に設定する 
+      jpostal/へのパスに誤りがある、などが考えられます。<BR>ネットスケープ4.7では、J-POSTAL処理以前に、ブラウザ自体が「ファイルが見つかりません」と表示し、子ウィンドウ内は空白となります。</TD></TR>
+  <TR>
+    <TD>6</TD>
+    <TD>検索結果が ｘ 件を越えました</TD>
+    <TD>デフォルトでは上限はありません。上位3桁で検索した場合、約1000件の郵便番号もいくつかあります。上限を設ける場合は、プロパティ 
+      LIMITに設定します。</TD></TR>
+  <TR>
+    <TD>その他</TD>
+    <TD>不明なエラーです</TD>
+    <TD>　</TD></TR></TBODY></TABLE>
+
+
+
+<p><A href="index.html">J-POSTALトップ</A></p>
+<hr>
+
+<div class=footer
+>Copyright &copy; 1999-2014 Ninton G.K. , All rights reserved.<br
+></div>
+
+</td></tr></table>
+
+
+</div></body></html>

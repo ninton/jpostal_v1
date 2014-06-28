@@ -1,0 +1,157 @@
+<html lang=ja><head>
+<meta http-equiv="Content-type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head><body><div align=center><table border=0 width=580><tr><td>
+<p><A href="index.html">J-POSTALトップ</A></p>
+
+<H2>JPOSTAL_PARENT_O</H2>
+<P>親ウィンドウ(住所入力フォーム)用のオブジェクト </P>
+<H2>説明</H2>
+<P>new <B>JPOSTAL_PARENT_O</B>(integer i_id);<BR><BR>引数 i_id 
+は、インスタンス番号を指定します。省略すると i_id = 0 となります。通常 i_id 
+は省略します。<BR><BR><B>JPOSTAL_PARENT_O</B>オブジェクトは次の機能があります。</P>
+<UL>
+  <LI>親ウィンドウの住所入力の各フィールドと、郵便データの各項目の関連付けの設定。 
+  <LI>子ウィンドウのＵＲＬの設定。 
+  <LI>検索用オプションパラメータの設定。 
+  <LI>子ウィンドウを開く機能。 
+  <LI>子ウィンドウで選択された住所を親ウィンドウの住所入力フィールドに自動入力する機能。</LI></UL>
+<P><STRONG>プロパティ</STRONG></P>
+<P>例では、JPOSTAL_PARENT_Oオブジェクトの変数名をjpp_objとします。 </P>
+<TABLE cellSpacing=0 cellPadding=5 border=1>
+  <TBODY>
+  <TR>
+    <TH>名称</TH>
+    <TH>説明</TH></TR>
+  <TR>
+    <TD>AUTO_RETURN_TYPE </TD>
+    <TD>子ウィンドウの閉じ方を設定します。次の値のいずれか一つを指定します。<BR>
+      <TABLE cellSpacing=0 cellPadding=5 border=1>
+        <TBODY>
+        <TR>
+          <TD>0 </TD>
+          <TD>子ウィンドウの[OK]または[CANCEL]を押すと閉じます。</TD></TR>
+        <TR>
+          <TD>1 </TD>
+          <TD>住所候補が１個だけの場合はただちに子ウィンドウを閉じます。</TD></TR>
+        <TR>
+          <TD>2 </TD>
+          <TD>1に加え、住所候補が２個以上の場合でも、住所候補の先頭が選択されたものとして、子ウィンドウを閉じます。</TD></TR></TBODY></TABLE><BR>デフォルト値<BR>　0<BR><BR>例 
+      検索結果が１個だけの場合、ただちに子ウィンドウを閉じます。 <PRE>jpp_obj.AUTO_RETURN_TYPE = 1;
+</PRE></TD></TR>
+  <TR>
+    <TD>ELEMENT_FORMAT </TD>
+    <TD>住所入力フォームの入力欄と郵便データの項目を関連付けを定義します。<BR><BR>　キー名：入力欄のエレメント名<BR>　値：　　郵便データ項目の書式<B>(※1)</B><BR><BR>デフォルト値<BR>　空のObject<BR><BR>例 
+<PRE>jpp_obj.ELEMENT_FORMAT.postcode1  = '%0';
+jpp_obj.ELEMENT_FORMAT.postcode2  = '%1';
+jpp_obj.ELEMENT_FORMAT.prefecture = '%2';
+jpp_obj.ELEMENT_FORMAT.address1   = '%3';
+jpp_obj.ELEMENT_FORMAT.address2   = '%4';
+</PRE></TD></TR>
+  <TR>
+    <TD>FORM </TD>
+    <TD>親ウィンドウの住所入力フォームのフォーム名またはフォーム番号を設定します。<BR><BR>デフォルト値<BR>　0<BR><BR>例 
+      &lt;FORM name=addrform &gt; の場合 <PRE>jpp_obj.FORM = 'addrform';
+</PRE></TD></TR>
+  <TR>
+    <TD>FORMAT </TD>
+    <TD>子ウィンドウに表示する住所の書式を設定します。郵便データの書式<B>(※1)</B>を参照してください。<BR><BR>デフォルト値<BR>　'%0-%1 
+      %2 %3 %4'<BR><BR>例 郵便番号を７桁連続で表示します。 <PRE>jpp_obj.FORMAT = '%0%1 %2 %3 %4';
+</PRE>例 大口事業所の番地、名称も表示します。 <PRE>jpp_obj.FORMAT = '%0%1 %2 %3 %4 %5 %6';
+</PRE></TD></TR>
+  <TR>
+    <TD>JIGYOSYO </TD>
+    <TD>大口事業所データを含める・含めないを設定します。<BR><BR>デフォルト値<BR>　0<BR><BR>例 
+      都道府県データと事業所データから検索します。 <PRE>jpp_obj.JIGYOSYO = 1;
+jpp_obj.KEN_ALL = 1;
+</PRE></TD></TR>
+  <TR>
+    <TD>KEN_ALL </TD>
+    <TD>都道府県データを含める・含めないを設定します。<BR><BR>デフォルト値<BR>　1<BR><BR>例 事業所データだけから検索します。 <PRE>jpp_obj.JIGYOSYO = 1;
+jpp_obj.KEN_ALL = 0;
+</PRE></TD></TR>
+  <TR>
+    <TD>LIMIT </TD>
+    <TD>検索結果の最大値を設定します。最大値を超えた場合、エラーとなります。 -1 
+      の場合、最大値制限は無効となります。<BR><BR>デフォルト値<BR>　-1<BR><BR>例 検索結果が 50 件を超えるとエラーとします。 <PRE>jpp_obj.LIMIT = 50;
+</PRE></TD></TR>
+  <TR>
+    <TD>WINDOW_FEATURES </TD>
+    <TD>子ウィンドウの幅、高さなど外観について定義します。 
+      window.open()の第３引数となります。<BR><BR>デフォルト値<BR>　'width=400,height=250,scrollbars=1,resizable=1'<BR><BR>例 
+      子ウィンドウの幅を500、高さを300とします。 <PRE>jpp_obj.WINDOW_FEATURES = 'width=500,height=300,scrollbars=1,resizable=1';
+</PRE></TD></TR>
+  <TR>
+    <TD>WINDOW_NAME </TD>
+    <TD>子ウィンドウ名を設定します。 
+      window.open()の第２引数となります。<BR><BR>デフォルト値<BR>　'jpostal'<BR><BR>例 <PRE>jpp_obj.WINDOW_NAME = 'jpostal2';
+</PRE></TD></TR>
+  <TR>
+    <TD>WINDOW_URL </TD>
+    <TD>子ウィンドウのURLを指定します。 
+      window.open()の第１引数となります。<BR>相対URL、絶対URLどちらも指定可能です。ただし'?'とそれにに続くクエリー文字列は指定できません。<BR><BR>デフォルト値<BR>　'jpostal_child.html'<BR><BR>例 
+<PRE>jpp_obj.WINDOW_URL = '/common/jpostal_child.html';
+</PRE></TD></TR></TBODY></TABLE>
+<H4>※1 郵便データの書式</H4>
+<TABLE cellSpacing=0 cellPadding=5 border=1>
+  <TBODY>
+  <TR>
+    <TD>%0 </TD>
+    <TD>郵便番号の上位３桁 </TD></TR>
+  <TR>
+    <TD>%1 </TD>
+    <TD>郵便番号の下位４桁 </TD></TR>
+  <TR>
+    <TD>%2 </TD>
+    <TD>都道府県 </TD></TR>
+  <TR>
+    <TD>%3 </TD>
+    <TD>市区町村 </TD></TR>
+  <TR>
+    <TD>%4 </TD>
+    <TD>町域 </TD></TR>
+  <TR>
+    <TD>%5 </TD>
+    <TD>丁目、番地 (大口事業所のみ) </TD></TR>
+  <TR>
+    <TD>%6 </TD>
+    <TD>大口事業所名称 (大口事業所のみ)</TD></TR></TBODY></TABLE>
+<H4>メソッド</H4>
+<TABLE cellSpacing=0 cellPadding=5 border=1>
+  <TBODY>
+  <TR>
+    <TH>名称</TH>
+    <TH>説明</TH></TR>
+  <TR>
+    <TD noWrap>main()</TD>
+    <TD>郵便番号を読み取り、子ウィンドウを開きます。<BR><BR>例 <PRE>jpp_obj.main();</PRE></TD></TR></TBODY></TABLE>
+<H3>必要なファイル</H3>
+<P>mwlib.js<BR>jpostal.js<BR>jpostal_parent.js </P>
+<H3>例1</H3><PRE>&lt;script src="/jpostal/mwlib.js"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &gt;&lt;/script&gt;<BR>&lt;script src="/jpostal/jpostal.js"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &gt;&lt;/script&gt;<BR>&lt;script src="/jpostal/jpostal_parent.js"&gt;&lt;/script&gt;<BR>&lt;script&gt;<BR>&lt;!-- <BR>function open_child_window()<BR>{<BR>    var jpp_obj = new JPOSTAL_PARENT_O();
+
+    jpp_obj.WINDOW_URL = 'jpostal_child.html';
+    jpp_obj.FORM = 0;
+    jpp_obj.ELEMENT_FORMAT.postcode1 = '%0';
+    jpp_obj.ELEMENT_FORMAT.postcode2 = '%1';
+    jpp_obj.ELEMENT_FORMAT.address1  = '%2';
+    jpp_obj.ELEMENT_FORMAT.address2  = '%3';
+    jpp_obj.ELEMENT_FORMAT.address3  = '%4';
+
+    jpp_obj.main();
+}<BR>// --&gt;<BR>&lt;/script&gt;<BR><BR><BR><BR><BR><BR>～省略～<BR>&lt;input type=button value="郵便→住所" onclick="open_child_window()"&gt;<BR>～省略～
+</PRE>
+
+
+
+<p><A href="index.html">J-POSTALトップ</A></p>
+<hr>
+
+<div class=footer
+>Copyright &copy; 1999-2014 Ninton G.K. , All rights reserved.<br
+></div>
+
+</td></tr></table>
+
+
+</div></body></html>

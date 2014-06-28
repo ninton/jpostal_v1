@@ -1,0 +1,38 @@
+<html lang=ja><head>
+<meta http-equiv="Content-type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head><body><div align=center><table border=0 width=580><tr><td>
+<p><A href="index.html">J-POSTALトップ</A></p>
+
+<H2>jpostal_diff.hta</H2>
+<P>J-POSTALデータ用の簡易diff</P>
+<P>J-POSTALの郵便データは、郵便番号の上３桁ごとに分かれており、約1000ファイル、約10Mバイトあります。ISDN64kで全ファイルを上書きアップロードすると、30分近くかかります。そこでアップロードが必要なファイルを選別する簡易diffを用意しました。(別途FTP作業が必要です)<BR><BR>WindowsのHTMLアプリケーションとして動作します。<BR><BR><b>ADSLなど1Mbps以上の通信回線をお使いの場合</b><BR>本機能は使うよりも、FTPソフトのミラーリングアップロード機能を推奨します。<BR><BR><b>ISDN(64k)だが、、更新頻度が６ケ月に１回程度の場合</b><BR>経験的には６ケ月経過すると、半分近くの約500ファイルは更新されています。この場合も、本機能は使うよりも、FTPソフトのミラーリングアップロード機能を推奨します。</P>
+<P><IMG height=429 alt="" src="images/5_2_1.gif" width=320></P>
+<P>使い方</P>
+<OL>
+  <LI>最新のデータは、D:\jpostal-031210\datajs\*.js<BR>前回のデータは、D:\jpostal-030610\datajs\*.js<BR>にあるとします。<BR>
+  <LI>[最新のデータ]欄の[参照]ボタンを押して、D:\jpostal-031210\datajs\001.js を選択します。<BR>
+  <LI>[前回のデータ]欄の[参照]ボタンを押して、D:\jpostal-030610\datajs\001.js を選択します。<BR>
+  <LI>[更新されたファイルをデスクトップにコピーする]チェックボックスにチェックを付けます。<BR>
+  <LI>[比較]ボタンを押します。<BR>比較方法は、ファイル日付ではなく、ファイル内容です。マシン構成によっては数分以上かかる場合があります。途中で「スクリプトを中断しますか」と表示されたら、[いいえ]ボタンを押します。<BR>
+  <LI>結果表示に、更新されたファイル、削除されたファイルの一覧が表示されます。<BR>
+  <LI>デスクトップに jpostal_diff_yyyymmddHHMMSS のフォルダが作成されます。yyyymmddHHMMSS 
+  は作業した日時、yyyy年mm月dd日HH時MM分SS秒です。そのフォルダ下に、更新されたファイルがコピーされています。このファイルをアップロード元として、FTPで上書きアップロードしてください。<BR>
+  <LI>削除されたファイルの一覧を見ながら、FTPでサーバー上から削除します。<br>
+(実際は常に1000ファイルあるため、実際は削除すべきファイルはありません)</LI></OL>
+<P>
+
+
+
+<p><A href="index.html">J-POSTALトップ</A></p>
+<hr>
+
+<div class=footer
+>Copyright &copy; 1999-2014 Ninton G.K. , All rights reserved.<br
+></div>
+
+</td></tr></table>
+
+
+</div></body></html>

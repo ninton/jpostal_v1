@@ -1,0 +1,56 @@
+<html lang=ja><head>
+<meta http-equiv="Content-type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head><body><div align=center><table border=0 width=580><tr><td>
+<p><A href="index.html">J-POSTALトップ</A></p>
+
+<H2>ステップ１：<IMG height=32 alt=* src="images/folder.gif" width=32 border=0>jpsotalのアップロード</H2>
+<P><IMG height=16 alt=* src="images/folder.gif" width=16>jpostal下を丸ごとWebサーバーにアップロードします。正しくアップロードできたことを確認するために、J-POSTALのサンプルファイルをWebブラウザで表示します。ここでは編集作業はありません。</P>
+<UL>
+  <LI>1.1 アップロード元とアップロード先 
+  <LI>1.2 FTP転送モード 
+  <LI>1.3 サンプルの住所入力フォームを表示する</LI></UL>
+<H3>1.1 アップロード元とアップロード先</H3>
+<P>J-POSTAL配布ディレクトリ構成のうち、<STRONG><IMG height=16 alt=* src="images/folder.gif" width=16>jpostal</STRONG>下をアップロードします。</P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD width="50%">アップロード元<BR>(ステップ０の図0-1と同じ構成)</TD>
+    <TD width="50%">アップロード先<BR>(ステップ０の図0-3と同じ構成)</TD></TR>
+  <TR>
+    <TD vAlign=top><IMG height=16 alt=* src="images/folder.gif" width=16>jpostal-1.2<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16><STRONG>jpostal</STRONG><STRONG><BR>　　<IMG height=16 alt=* src="images/file.gif" width=16>*.*<BR>　　<IMG height=16 alt=* src="images/folder.gif" width=16>datajs<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.js<BR>　　<IMG height=16 alt=* src="images/folder.gif" width=16>sample<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>sample001.html<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.html<BR></STRONG>　<IMG height=16 alt=* src="images/folder.gif" width=16>MANUAL　　　※1<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>UTILS　　　　※1<BR><BR>※1 <IMG height=16 alt=* src="images/folder.gif" width=16>MANUAL、<IMG height=16 alt=* src="images/folder.gif" width=16>UTILS 
+      はアップロードしません。</TD>
+    <TD vAlign=top>http://myserver/mysite/ 　<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>mycorner/<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16>input.html<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16>jpostal_child.html　※2<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>cgi-bin/<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16>regist.cgi<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16><STRONG>jpostal/</STRONG><BR><STRONG>　　<IMG height=16 alt=* src="images/file.gif" width=16>*.*<BR>　　<IMG height=16 alt=* src="images/folder.gif" width=16>datajs/<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.js<BR>　　<IMG height=16 alt=* src="images/folder.gif" width=16>sample/<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>sample001.html　</STRONG>※3<BR><STRONG>　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.html<BR><BR></STRONG>※2 
+      ステップ２で編集およびアップロード予定<BR>※3 サンプルの住所入力フォーム</TD></TR></TBODY></TABLE>
+<DIV class=figtitle>図1-1 アップロード元とアップロード先</DIV>
+<H3>1.2 FTP転送モード</H3>
+<P>アスキー、漢字変換なし、上書きコピーで、アップロードします。<BR><BR>※FTPサーバー上のディレクトリ構成は、お使いのWebサーバーの設定を調べるか、管理者に問い合わせてください。</P>
+<H3>1.3 サンプルの住所入力フォームを表示する</H3>
+<OL>
+  <LI>サンプルの住所入力フォームのURLは、http://myserver/mysite/jpostal/sample/sample001.html</A> 
+  です。WebブラウザのアドレスバーにURLを直接入力して表示します。<BR>↓<BR>図1-2の左側のような「住所入力」フォームが表示されます。 
+  <BR><BR>
+  <LI>郵便番号 <STRONG>100</STRONG> 
+  を入力し、【郵便→住所】ボタンを押します。<BR>↓<BR>図1-2の右上のような「住所検索」子ウィンドウが開きます。子ウィンドウ内には住所一覧リストが表示されているはずです。<BR><BR>
+  <LI>「住所検索」子ウィンドウの住所一覧リストの<STRONG>[100-0000 
+  東京都千代田区]</STRONG>を選択します。<BR>【OK】ボタンを押します。<BR>↓<BR>「住所検索」子ウィンドウが閉じます。<BR>「住所入力」フォームに 
+  <STRONG>100</STRONG>, <STRONG>0000</STRONG>, <STRONG>東京都</STRONG>, 
+  <STRONG>千代田区</STRONG> が自動入力されているはずです。</LI></OL>
+<P>※【応募】ボタンを押しても、送信先CGIを設定していないので、サーバーエラーまたは無意味な表示になります。</P>
+<P align=center><IMG alt="" src="images/1_1_1.gif"><BR>
+<DIV class=figtitle>図1-2 サンプルの住所入力フォームと子ウィンドウ</DIV>
+
+
+
+<p><A href="index.html">J-POSTALトップ</A></p>
+<hr>
+
+<div class=footer
+>Copyright &copy; 1999-2014 Ninton G.K. , All rights reserved.<br
+></div>
+
+</td></tr></table>
+
+
+</div></body></html>

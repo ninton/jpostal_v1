@@ -1,0 +1,237 @@
+<html lang=ja><head>
+<meta http-equiv="Content-type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head><body><div align=center><table border=0 width=580><tr><td>
+<p><A href="index.html">J-POSTALトップ</A></p>
+
+<H2>ステップ３：住所入力フォームの編集</H2>
+<UL>
+  <LI>3.1 作業前のファイルをオリジナルファイルとして保存します。 
+  <LI>3.2 【郵便→住所】ボタンを追加します。 
+  <LI>3.3 入力欄のname属性を調べます。 
+  <LI>3.4 ユーティリティを使ってスクリプトを作成します。 
+  <LI>3.5 Webサーバーにアップロードします。 
+  <LI>3.6 住所入力フォームを表示し、JavaScriptエラーがないことを確認します。 </LI></UL>
+<HR>
+
+<H3>3.1. 作業前のファイルをオリジナルファイルとして保存します。</H3>
+<P>いつでも作業前の状態に戻せるように、住所入力フォームのファイルをコピーして、オリジナルファイルとして別の場所に保存しておきます。</P><PRE> 1: &lt;html&gt;&lt;head&gt;
+ 2: &lt;/head&gt;&lt;body&gt;
+ 3: &lt;form action="../cgi-bin/regist.cgi" method=POST&gt;
+ 4: 住所入力&lt;br&gt;
+ 5: 
+ 6: 郵便番号 &lt;input name=postcode1&gt;-&lt;input name=postcode2&gt;&lt;br&gt;
+ 7: 
+ 8: 住所１
+ 9: &lt;select name=address1&gt;
+10: &lt;option value="" selected&gt;選択してください 
+11: &lt;option value="北海道"&gt;北海道<BR>～中略～
+58: &lt;/select&gt;&lt;br&gt;
+59: 
+60: 住所２ &lt;input name=address2&gt;&lt;br&gt;
+61: 住所３ &lt;input name=address3&gt;&lt;br&gt;
+62: 住所４ &lt;input name=address4&gt;&lt;br&gt;
+63: 名　称 &lt;input name=address5&gt;&lt;br&gt;
+64: 
+65: &lt;input type=submit value="応募"&gt;
+66: &lt;/form&gt;
+67: &lt;/body&gt;&lt;/html&gt;</PRE>
+<DIV class=figtitle>図3-1 編集前の住所入力フォームのHTMLソース</DIV>
+<HR>
+
+<H3>3.2 【郵便→住所】ボタンを追加します。</H3>
+<P>郵便番号欄のすぐ右側か直後に配置する場合が多いようです。図3-2は郵便番号欄の右側にボタンを表示します。</P><PRE> 1: &lt;html&gt;&lt;head&gt;
+ 2: &lt;/head&gt;&lt;body&gt;
+ 3: &lt;form action="../cgi-bin/regist.cgi" method=POST&gt;
+ 4: 住所入力&lt;br&gt;
+ 5: 
+ 6: 郵便番号 &lt;input name=postcode1&gt;-&lt;input name=postcode2&gt;<BR>　　<STRONG><FONT color=#ff0000>&lt;input type=button value="郵便→住所" onclick="open_child_window();"&gt;</FONT></STRONG>&lt;br&gt;
+ 7: 
+ 8: 住所１<BR></PRE>
+<DIV class=figtitle>図3-2 【郵便→住所】ボタン追加後 
+<HR>
+</DIV>
+<H3>3.3 入力欄のname属性を調べる</H3>
+<P>図3-3のように住所入力フォームに「<STRONG>100-0001 
+東京都千代田区千代田</STRONG>」と入力することを想像してください。（実際に入力する必要はありません）<BR><BR>そして、どの入力欄が埋まり、どの入力欄が空欄のままか、ということに注目してください。<BR>図3-3では、住所４と名称は空欄です。つまり図3-3の住所入力フォームは郵便番号の２つの欄、住所１、住所２、住所３までを自動入力し、住所４、名称は自動入力の対象ではない、ということです。<BR><BR>次に、埋まった入力欄のname属性を調べます。空欄だった入力欄は調べる必要はありません。図3-4のように&lt;input&gt;タグや&lt;select&gt;タグの赤字がname属性です。<BR><BR>最後に、図3-5のように各入力欄のname属性と埋めた値をまとめてください。</P>
+<P align=center>
+<TABLE cellSpacing=0 border=1>
+  <TBODY>
+  <TR>
+    <TD>住所入力<BR>郵便番号 [100]-[0001]【郵便→住所】<BR>住所１&nbsp;[東京都]▼<BR>住所２ 
+      [千代田区　　　　　]<BR>住所３ [千代田　　　　　　]<BR>住所４ [　　　　　　　　　]<BR>名　称 
+      [　　　　　　　　　]<BR>　　　【応募】 </TD></TD></TR></TBODY></TABLE>
+<DIV class=figtitle>図3-3 「<STRONG>100-0001 東京都千代田区千代田</STRONG>」と入力した様子</DIV>
+<P><PRE> 1: &lt;html&gt;&lt;head&gt;
+ 2: &lt;/head&gt;&lt;body&gt;
+ 3: &lt;form action="../cgi-bin/regist.cgi" method=POST&gt;
+ 4: 住所入力&lt;br&gt;
+ 5: 
+ 6: <STRONG>郵便番号</STRONG> &lt;input name=<FONT color=#ff0000><STRONG>postcode1</STRONG></FONT>&gt;-&lt;input name=<FONT color=#ff0000><STRONG>postcode2</STRONG></FONT>&gt;<BR> 　 &lt;input type=button value="郵便→住所" onclick="open_child_window();"&gt;&lt;br&gt;
+ 7: 
+ 8: <STRONG>住所１</STRONG>
+ 9: &lt;select name=<STRONG><FONT color=#ff0000>address1</FONT></STRONG>&gt;
+10: &lt;option value="" selected&gt;選択してください 
+11: &lt;option value="北海道"&gt;北海道<BR>～中略～
+58: &lt;/select&gt;&lt;br&gt;
+59: 
+60: <STRONG>住所２</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address2</FONT></STRONG>&gt;&lt;br&gt;
+61: <STRONG>住所３</STRONG> &lt;input name=<STRONG><FONT color=#ff0000>address3</FONT></STRONG>&gt;&lt;br&gt;
+62: 住所４ &lt;input name=<FONT color=#000000>address4</FONT>&gt;&lt;br&gt;
+63: 名　称 &lt;input name=<FONT color=#000000>address5</FONT>&gt;&lt;br&gt;
+64: 
+65: &lt;input type=submit value="応募"&gt;
+66: &lt;/form&gt;
+67: &lt;/body&gt;&lt;/html&gt;</PRE>
+<DIV class=figtitle>図3-4 入力欄のname属性</DIV>
+<P align=center>
+<TABLE cellSpacing=0 cellPadding=3 border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <P align=center><STRONG>name属性</STRONG></P></TD>
+    <TD>
+      <P align=center><STRONG>入力欄に埋めた値</STRONG></P></TD></TR>
+  <TR>
+    <TD>postcode1</TD>
+    <TD>100</TD></TR>
+  <TR>
+    <TD>postcode2</TD>
+    <TD>0001</TD></TR>
+  <TR>
+    <TD>address1</TD>
+    <TD>東京都</TD></TR>
+  <TR>
+    <TD>address2　</TD>
+    <TD>千代田区</TD></TR>
+  <TR>
+    <TD>address3</TD>
+    <TD>千代田</TD></TR></TBODY></TABLE>
+<DIV class=figtitle>図3-5 name属性と埋めた値</DIV>
+<P></P>
+<HR>
+
+<P></P>
+<H3>3.4 ユーティリティを使って、追加スクリプトを作成しする</H3>
+<OL>
+  <LI>HTMLとjavascriptベースの<A href="../UTILS/jpostal_parent_wizard.html" target=_blank><STRONG>ユーティリティ</STRONG></A>を開きます。 
+
+  <LI>ユーティリティの説明にそって設定します。 
+  <LI>ユーティリティの「4. 入力欄」は、3.3の図3-5のようにまとめた表をもとに設定します。 
+  <LI>各項目を設定したら【作成】ボタンを押します。 
+  <LI>作成結果欄に追加スクリプトが表示されますので、全て選択してコピーします。 
+  <LI>コピーした内容を、住所入力フォームの&lt;head&gt;～&lt;/head&gt;内に挿入します。<BR></LI></OL><PRE>追加前の行番号
+↓
+ 1:  1: &lt;html&gt;&lt;head&gt;
+<STRONG>  :  2: &lt;script src="../jpostal/mwlib.js"         &gt;&lt;/script&gt;
+  :  3: &lt;script src="../jpostal/jpostal.js"       &gt;&lt;/script&gt;
+  :  4: &lt;script src="../jpostal/jpostal_parent.js"&gt;&lt;/script&gt;
+  :  5: &lt;script&gt;
+  :  6: &lt;!-- 
+  :  7: function open_child_window()
+  :  8: {
+  :  9:     var jpp_obj = new JPOSTAL_PARENT_O();
+  : 10:
+  : 11:     jpp_obj.WINDOW_URL = './jpostal_child.html';
+  : 12:     jpp_obj.FORM = 0;
+  : 13:     jpp_obj.ELEMENT_FORMAT.postcode1 = '%0';
+  : 14:     jpp_obj.ELEMENT_FORMAT.postcode2 = '%1';
+  : 15:     jpp_obj.ELEMENT_FORMAT.address1  = '%2';
+  : 16:     jpp_obj.ELEMENT_FORMAT.address2  = '%3';
+  : 17:     jpp_obj.ELEMENT_FORMAT.address3  = '%4';
+  : 18: 
+  : 19:     jpp_obj.main();
+
+  : 20: }
+  : 21: // --&gt;
+  : 22: &lt;/script&gt;</STRONG>
+ 2: 23: &lt;/head&gt;&lt;body&gt;
+ 3: 24: &lt;form action="../cgi-bin/regist.cgi" method=POST&gt;
+ 4: 25: 住所入力&lt;br&gt;
+ 5: 26: 
+ 6: 27: 郵便番号 &lt;input name=postcode1&gt;-&lt;input name=postcode2&gt;
+        &lt;input type=button value="郵便→住所" onclick="open_child_window();"&gt;&lt;br&gt;
+ 7: 28: 住所１<BR> 8: 29
+ 9: 30: &lt;select name=address1&gt;
+10: 31: &lt;option value="" selected&gt;選択してください 
+11: 32: &lt;option value="北海道"&gt;北海道<BR>以下、省略
+</PRE>
+<DIV class=figtitle>図3-6 追加スクリプトの挿入後</DIV>
+<HR>
+
+<P></P>
+<H3>3.5 Webサーバーにアップロードする</H3>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD noWrap>http://myserver/mysite/<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>mycorner/<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16><STRONG>input.html</STRONG> 
+      　　　　　　<STRONG>※ステップ３のアップロード先</STRONG><BR>　　<IMG height=16 alt=* src="images/file.gif" width=16><FONT 
+      color=#000000>jpostal_child.html<STRONG>　　</STRONG>※ステップ２でアップロード済み<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>cgi-bin/<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16>regist.cgi<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>jpostal/　　　　　※ステップ１でアップロード済み<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16>*.*<BR>　　<IMG height=16 alt=* src="images/folder.gif" width=16>datajs/<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.js<BR>　　<IMG height=16 alt=* src="images/folder.gif" width=16>sample/<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.html</FONT></TD></TR></TBODY></TABLE>
+<HR>
+
+<H3>3.6. 住所入力フォームを表示し、JavaScriptエラーがないことを確認する</H3>
+<P>各手順の途中で、JavaScriptエラーが表示された、期待結果にならない、期待結果になったがJavaScriptエラーが表示された、などの場合は、編集時の入力ミスや設定ミスが考えられます。再度、編集内容を見直してください。<BR><BR><STRONG>テストケース１</STRONG><BR>住所入力フォームを表示する</P>
+<P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>手順</TD>
+    <TD>作業内容</TD>
+    <TD>期待結果</TD></TR>
+  <TR>
+    <TD>1</TD>
+    <TD>住所入力フォームのURLは、http://myserver/mysite/mycorner/input.html 
+      です。<BR>Webブラウザのアドレスバーに直接入力して、表示します。</TD>
+    <TD>住所入力フォームが表示されます。</TD></TR></TBODY></TABLE></P>
+<P><STRONG>テストケース２</STRONG><BR>郵便番号を空欄で、子ウィンドウを表示する</P>
+<P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>手順</TD>
+    <TD>作業内容</TD>
+    <TD>期待結果</TD></TR>
+  <TR>
+    <TD>1</TD>
+    <TD>住所入力フォームの郵便番号欄を空欄にします。<BR>住所入力フォームの【郵便→住所】ボタンを押します。</TD>
+    <TD>子ウィンドウが開きます。<BR>「結果件数は０件。郵便番号が３桁未満です。」と表示されます。</TD></TR>
+  <TR>
+    <TD>2</TD>
+    <TD>子ウィンドウの【閉じる】ボタンを押します。<BR></TD>
+    <TD>子ウィンドウが閉じます。</TD></TR></TBODY></TABLE></P>
+<P><STRONG>テストケース３</STRONG><BR>郵便番号を100と入力して、子ウィンドウを表示する</P>
+<P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>手順</TD>
+    <TD>作業内容</TD>
+    <TD>期待結果</TD></TR>
+  <TR>
+    <TD>1</TD>
+    <TD>住所入力フォームの郵便番号欄に <STRONG>100</STRONG> 
+      を入力します。<BR>住所入力フォームの【郵便→住所】ボタンを押します。</TD>
+    <TD>子ウィンドウが開きます。<BR>子ウィンドウに住所一覧プルダウンメニューが表示されます。</TD></TR>
+  <TR>
+    <TD>2</TD>
+    <TD>子ウィンドウの住所一覧から、「<STRONG>100-0000 
+      東京都千代田区</STRONG>」を選択します。<BR>子ウィンドウの【OK】ボタンを押します。</TD>
+    <TD>子ウィンドウが閉じます。<BR>住所入力フォームの該当する入力欄に、<STRONG>100</STRONG>, 
+      <STRONG>0000</STRONG>, <STRONG>東京都</STRONG>, 
+      <STRONG>千代田区</STRONG>が自動入力されます。</TD></TR></TBODY></TABLE></P>
+
+
+
+
+<p><A href="index.html">J-POSTALトップ</A></p>
+<hr>
+
+<div class=footer
+>Copyright &copy; 1999-2014 Ninton G.K. , All rights reserved.<br
+></div>
+
+</td></tr></table>
+
+
+</div></body></html>

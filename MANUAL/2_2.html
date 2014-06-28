@@ -1,0 +1,136 @@
+<html lang=ja><head>
+<meta http-equiv="Content-type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head><body><div align=center><table border=0 width=580><tr><td>
+<p><A href="index.html">J-POSTALトップ</A></p>
+
+<H2>ステップ２：<IMG height=32 alt=* src="images/file.gif" width=32>子ウィンドウの編集</H2>
+<P>ここでの作業手順は、</P>
+<UL>
+  <LI>2.1 子ウィンドウのサンプルファイルを作業ディレクトリにコピーします。 
+  <LI>2.2 &lt;SCRIPT&gt;タグのSRC属性を編集します。 
+  <LI>2.3 デザインをカスタマイズします。 
+  <LI>2.4 Webサーバーにアップロードします。 
+  <LI>2.5 子ウィンドウ単独で表示し、JavaScriptエラーがないことを確認します。</LI></UL>
+<H3>2.1 子ウィンドウのサンプルファイルを作業ディレクトリにコピーする</H3>
+<P>J-POSTAL配布ディレクトリから、子ウィンドウのサンプルファイルを作業ディレクトリなどにコピーします。 </P>
+<P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD noWrap><IMG height=16 alt=* src="images/folder.gif" width=16>jpostal-1.2<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>jpostal<BR>　　<IMG height=16 alt=* src="images/folder.gif" width=16>sample<BR><FONT color=#000000>　　　<IMG height=16 alt=* src="images/file.gif" width=16><STRONG>jpostal_child.html　　　</STRONG>子ウィンドウのサンプルファイル（このファイルを直接編集しないように！）</FONT><BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.html</TD></TR></TBODY></TABLE></P>
+<H3>2.2 &lt;SCRIPT&gt;タグのSRC属性を編集する</H3>
+<P>作業ディレクトリにコピーした子ウィンドウファイルをテキストエディタで編集します。<BR>ここで重要なことは、<IMG height=16 alt=* src="images/file.gif" width=16>子ウィンドウから見た、<IMG height=16 alt=* src="images/folder.gif" width=16>jpostal の相対パスです。架空のWebサイトでは、../jpostal/ 
+でした。（ステップ０の「図0-4 ３つの要素の位置関係」を参照）<BR><BR>編集前の状態です。<SPAN 
+style="BACKGROUND: #00ccff">反転表示</SPAN>の４箇所を ../jpostal に修正します。</P><PRE> 9: &lt;meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"&gt;
+10: &lt;title&gt;J-POSTAL&lt;/title&gt;
+11: 
+12: &lt;script src="<SPAN style="BACKGROUND: #00ccff">..</SPAN>/mwlib.js"        &gt;&lt;/script&gt;
+13: &lt;script src="<SPAN style="BACKGROUND: #00ccff">..</SPAN>/jpostal.js"      &gt;&lt;/script&gt;
+14: &lt;script src="<SPAN style="BACKGROUND: #00ccff">..</SPAN>/jpostal_child.js"&gt;&lt;/script&gt;
+15: &lt;script&gt;
+16: &lt;!-- 
+17: var jpc_obj;
+18: jpc_obj = new JPOSTAL_CHILD_O();
+19: jpc_obj.judge_raw_kanji('あいうえお');
+20: jpc_obj.get_arguments();
+21: jpc_obj.include('<SPAN style="BACKGROUND: #00ccff">..</SPAN>/datajs/%p.js');
+22: // --&gt;
+23: &lt;/script&gt;&lt;script&gt;
+24: &lt;!-- 
+</PRE>
+<P>編集後の状態です。</P><PRE> 9: &lt;meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"&gt;
+10: &lt;title&gt;J-POSTAL&lt;/title&gt;
+11: 
+12: &lt;script src="<SPAN style="BACKGROUND: #00ccff">../jpostal</SPAN>/mwlib.js"        &gt;&lt;/script&gt;
+13: &lt;script src="<SPAN style="BACKGROUND: #00ccff">../jpostal</SPAN>/jpostal.js"      &gt;&lt;/script&gt;
+14: &lt;script src="<SPAN style="BACKGROUND: #00ccff">../jpostal</SPAN>/jpostal_child.js"&gt;&lt;/script&gt;
+15: &lt;script&gt;
+16: &lt;!-- 
+17: var jpc_obj;
+18: jpc_obj = new JPOSTAL_CHILD_O();
+19: jpc_obj.judge_raw_kanji('あいうえお');
+20: jpc_obj.get_arguments();
+21: jpc_obj.include('<SPAN style="BACKGROUND: #00ccff">../jpostal</SPAN>/datajs/%p.js');
+22: // --&gt;
+23: &lt;/script&gt;&lt;script&gt;
+24: &lt;!-- 
+</PRE>
+<H3>2.3. デザインをカスタマイズする</H3>
+<P>※ヒント！　ステップ３の住所入力フォームの編集が完了し、表示確認できた後に、子ウィンドウのデザインのカスタマイズをしたほうがいいでしょう。</P>
+<P>ページ上部、ページ下部の表示内容やレイアウトをカスタマイズします。背景色、画像表示、スタイルシート定義も可能です。<BR><BR><STRONG>&lt;script&gt;</STRONG>と<STRONG>&lt;/script&gt;</STRONG>の範囲は、郵便番号や検索結果件数を表示するスクリプトです。変更しないでください。</P><PRE>46: &lt;!-- 
+47: /*------------------------------------------------------------
+48:  * ページ上部
+49:  *------------------------------------------------------------*/
+50:  --&gt;
+51: &lt;body&gt;
+52: &lt;form&gt;
+53: &lt;h1&gt;検索結果&lt;/h1&gt;
+54: 
+55: 郵便番号 <STRONG>&lt;script&gt;document.write(jpc_obj.POSTCODE);&lt;/script&gt;&lt;</STRONG>br&gt;
+56: &lt;br&gt;
+57: 
+58: 検索結果 <STRONG>&lt;script&gt;document.write(jpc_obj.COUNT);&lt;/script&gt;</STRONG> 件&lt;br&gt;
+59: &lt;br&gt;
+60: 
+61: <STRONG>&lt;script&gt;</STRONG>
+62: if ( jpc_obj.WARNING_RAW_KANJI )
+63: {
+64:   document.write('&lt;' + 'b' + '&gt;');
+65:   document.write('お使いのブラウザでは検索結果が文字化けしている可能性があります。');
+66:   document.write('文字化けしている場合このウィンドウを閉じてから手動で入力してください。');
+67:   document.write('&lt;' + '/b' + '&gt;');
+68:   document.write('&lt;' + 'br' + '&gt;');
+69:   document.write('&lt;' + 'br' + '&gt;');
+70: }
+71: <STRONG>&lt;/script&gt;</STRONG>
+
+152: &lt;!-- 
+153: /*------------------------------------------------------------
+154:  * ページ下部
+155:  * MW Web StudioのCopyrightは削除してもかまいません
+156:  *------------------------------------------------------------*/
+157:  --&gt;
+158: &lt;hr&gt;
+159: &lt;div align=right&gt;J-POSTAL, Copyright (c) 2003 MW Web Studio&lt;/div&gt;
+160: 
+161: &lt;/form&gt;
+162: &lt;/body&gt;&lt;/html&gt;
+</PRE>
+<P>ページ中央は、ボタンの表示文字列の変更ができます。その他の部分のカスタマイズをする場合は、関数リファレンスを参考にしてください。</P><PRE>80: // １件も見つからなかった場合の[閉じる]ボタンの表示文字列
+81: var CLOSE_BUTTON  = "<SPAN style="BACKGROUND: #00ccff">閉じる</SPAN>";
+82: 
+83: // 見つかった場合の[OK]ボタンと[CANCEL]ボタンの表示文字列
+84: var OK_BUTTON     = "<SPAN style="BACKGROUND: #00ccff">　ＯＫ　</SPAN>";
+85: var CANCEL_BUTTON = "<SPAN style="BACKGROUND: #00ccff">キャンセル</SPAN>";
+</PRE>
+<H3>2.4. Webサーバーにアップロードする</H3>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD noWrap>http://myserver/mysite/<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>mycorner/<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16>input.html 
+      <BR>　　<IMG height=16 alt=* src="images/file.gif" width=16><FONT 
+      color=#000000><STRONG>jpostal_child.html　　</STRONG>※アップロード先<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>cgi-bin/<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16>regist.cgi<BR>　<IMG height=16 alt=* src="images/folder.gif" width=16>jpostal/　　　　　　　　　※ステップ１でアップロード済み<BR>　　<IMG height=16 alt=* src="images/file.gif" width=16>*.*<BR>　　<IMG height=16 alt=* src="images/folder.gif" width=16>datajs/<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.js<BR>　　<IMG height=16 alt=* src="images/folder.gif" width=16>sample/<BR>　　　<IMG height=16 alt=* src="images/file.gif" width=16>*.html</FONT></TD></TR></TBODY></TABLE>
+<H3>2.5. 子ウィンドウ単独で表示し、JavaScriptエラーがないことを確認する</H3>
+<OL>
+  <LI>子ウィンドウのURLは、http://myserver/mysite/mycorner/jpostal_child.html 
+  です。Webブラウザのアドレスバーに直接入力して、表示します。 <BR>↓<BR>「検索結果　０件、郵便番号が３桁未満です」と表示されたら、成功です。 
+  <BR><BR>
+  <LI>表示途中で、JavaScriptエラーの警告ボックスが表示されたら、設定ミスや入力ミスが考えられます。本ステップの「2.2 
+  &lt;SCRIPT&gt;タグのSRC属性を編集する」「2.3 デザインをカスタマイズする」の編集作業を見直してください。<BR><BR>
+  <LI>ページが見つかりません、旨のエラーの場合は、アップロード先が間違っているか、アドレスバー入力ミスが考えられます。<BR><BR></LI></OL>
+
+
+
+<p><A href="index.html">J-POSTALトップ</A></p>
+<hr>
+
+<div class=footer
+>Copyright &copy; 1999-2014 Ninton G.K. , All rights reserved.<br
+></div>
+
+</td></tr></table>
+
+
+</div></body></html>

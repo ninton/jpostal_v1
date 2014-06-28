@@ -1,0 +1,128 @@
+<html><head>
+<!-- 
+JPOSTALサンプル
+
+Copyright (c) 2003-2014 Aoki Makoto Ninton G.K. http://www.ninton.co.jp
+
+ -->
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+
+<script src="jpostal/mwlib.js"         ></script>
+<script src="jpostal/jpostal.js"       ></script>
+<script src="jpostal/jpostal_parent.js"></script>
+<script>
+<!-- 
+function open_child_window()
+{
+	var jpp_obj = new JPOSTAL_PARENT_O();
+
+	jpp_obj.WINDOW_URL = 'jpostal/jpostal_child.html';
+	jpp_obj.FORM = 0;
+	jpp_obj.ELEMENT_FORMAT.postcode1 = '%0';
+	jpp_obj.ELEMENT_FORMAT.postcode2 = '%1';
+	jpp_obj.ELEMENT_FORMAT.address1  = '%2';
+	jpp_obj.ELEMENT_FORMAT.address2  = '%3';
+	jpp_obj.ELEMENT_FORMAT.address3  = '%4';
+
+	jpp_obj.main();
+}
+// -->
+</script>
+
+</head><body>
+<form>
+
+<h1>住所入力</h1>
+
+
+★付きの項目に自動入力します。<br>
+<table border=0>
+<tr>
+  <td>郵便番号</td>
+  <td>〒 <input name=postcode1 size=4 maxlength=3
+       >-<input name=postcode2 size=5 maxlength=4>
+  </td>
+</tr>
+
+<tr>
+  <td>&nbsp;</td>
+  <td><input type=button value="郵便→住所"	onclick="open_child_window();"> (半角数字)
+      <br>
+      <small>郵便番号を入力の上、このボタンを押すと住所の一部が自動入力されます。</small>
+  </td>
+</tr>
+
+<tr>
+  <td>★都道府県 </td>
+  <td><select name=address1>
+<option value="" selected>選択してください 
+<option value="01">北海道
+<option value="02">青森県
+<option value="03">岩手県
+<option value="04">宮城県
+<option value="05">秋田県
+<option value="06">山形県
+<option value="07">福島県
+<option value="08">茨城県
+<option value="09">栃木県
+<option value="10">群馬県
+<option value="11">埼玉県
+<option value="12">千葉県
+<option value="13">東京都
+<option value="14">神奈川県
+<option value="15">新潟県
+<option value="16">富山県
+<option value="17">石川県
+<option value="18">福井県
+<option value="19">山梨県
+<option value="20">長野県
+<option value="21">岐阜県
+<option value="22">静岡県
+<option value="23">愛知県
+<option value="24">三重県
+<option value="25">滋賀県
+<option value="26">京都府
+<option value="27">大阪府
+<option value="28">兵庫県
+<option value="29">奈良県
+<option value="30">和歌山県
+<option value="31">鳥取県
+<option value="32">島根県
+<option value="33">岡山県
+<option value="34">広島県
+<option value="35">山口県
+<option value="36">徳島県
+<option value="37">香川県
+<option value="38">愛媛県
+<option value="39">高知県
+<option value="40">福岡県
+<option value="41">佐賀県
+<option value="42">長崎県
+<option value="43">熊本県
+<option value="44">大分県
+<option value="45">宮崎県
+<option value="46">鹿児島県
+<option value="47">沖縄県 
+    </select>
+  </td>
+</tr>
+
+<tr><td>★市区町村 </td><td><input name=address2 size=40 maxlength=100>(全角)</td></tr>
+<tr><td>★町域     </td><td><input name=address3 size=40 maxlength=100>(全角)</td></tr>
+<tr><td>番地建物 </td><td><input name=address4 size=40 maxlength=100>(全角)</td></tr>
+<tr><td>名称     </td><td><input name=address5 size=40 maxlength=100>(全角)</td></tr>
+</table>
+
+
+
+<div align=center>
+
+	<input type=reset  value="クリア">
+</div>
+
+<hr>
+<div align=right>Copyright(C) 2003-2014 Ninton G.K.</div>
+
+</form>
+</body></html>

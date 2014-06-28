@@ -1,0 +1,66 @@
+<html lang=ja><head>
+<meta http-equiv="Content-type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head><body><div align=center><table border=0 width=580><tr><td>
+<p><A href="index.html">J-POSTALトップ</A></p>
+
+<H2>ケーススタディ：EUC-JPのページに組み込む場合</H2>
+
+<p>　実は、J-POSTALの文字コードについて明言を避けてきました。
+J-POSTALの文字コードはShift_JISです。
+住所入力フォームの文字コードがShift_JISであれば特に問題なく、組み込むことができます。<br>
+<br>
+
+<h3>1. 住所入力フォームはEUC-JP、子ウィンドウもEUC-JPの場合</h3>
+
+<p>
+　J-POSTALの全ファイルをアップロードするとき、サーバー上の文字コードをEUC-JPでアップロードします。<br>
+　<font color=red>配布状態の子ウィンドウのMETAタグはShift_JISです。必要に応じてcharsetをEUC-JPに編集してください。</font><br>
+<br>
+　１つのサイトでShift_JIS版とEUC-JP版を使う場合、例えば、jpostal/ をShift_JIS版、jpostal_euc/ をEUC-JP版として設置します。
+</p>
+
+
+<h3>2. 住所入力フォームはEUC-JP、子ウィンドウはShift_JISの場合</h3>
+
+<p>
+　1の方法はシンプルでいい方法だと思いますが、J-POSTALは約10Mバイトあるため、1の方法は約20Mバイト必要になります。
+そこで2の方法も紹介しておきます。
+</p>
+
+<ol>
+<li>通常の手順で設置し、住所入力フォームの編集も済ませておきます。<br>
+<li><a href="http://homepage2.nifty.com/mwweb/002/">ソフトウェアページ</a>から、J-POSTAL EUCファイルをダウンロードします。<br>
+<li>解凍した mwlib_euc.js jpostal_euc.js jpostal_parent_euc.js をサーバーの jpostal/mwlib.js と同じディレクトリにアップロードします。<br>
+<li>親フォームの一部を次のように編集します。EUC-JPで保存してください。<br>
+
+
+編集前
+<pre>
+&lt;script src="～ほにゃらら～/jpostal/mwlib.js"         &gt;&lt;/script&gt;
+&lt;script src="～ほにゃらら～/jpostal/jpostal.js"       &gt;&lt;/script&gt;
+&lt;script src="～ほにゃらら～/jpostal/jpostal_parent.js"&gt;&lt;/script&gt;
+</pre>
+
+編集後
+<PRE>
+&lt;script src="～ほにゃらら～/jpostal/mwlib<b>_euc</b>.js"         &gt;&lt;/script&gt;
+&lt;script src="～ほにゃらら～/jpostal/jpostal<b>_euc</b>.js"       &gt;&lt;/script&gt;
+&lt;script src="～ほにゃらら～/jpostal/jpostal_parent<b>_euc</b>.js"&gt;&lt;/script&gt;
+</pre>
+</ol>
+
+
+
+<p><A href="index.html">J-POSTALトップ</A></p>
+<hr>
+
+<div class=footer
+>Copyright &copy; 1999-2014 Ninton G.K. , All rights reserved.<br
+></div>
+
+</td></tr></table>
+
+
+</div></body></html>

@@ -1,0 +1,172 @@
+<html><head>
+<!-- 
+JPOSTALサンプル
+
+Copyright (c) 2003-2014 Aoki Makoto Ninton G.K. http://www.ninton.co.jp
+
+ -->
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+
+<script src="mwlib.js"        ></script>
+<script src="jpostal.js"       language="JavaScript"></script>
+<script src="jpostal_child.js" language="JavaScript"></script>
+<script>
+<!-- 
+var jpc_obj;
+jpc_obj = new JPOSTAL_CHILD_O();
+jpc_obj.judge_raw_kanji('あいうえお');
+jpc_obj.get_arguments();
+jpc_obj.include('./datajs/%p.js');
+// -->
+</script><script>
+<!-- 
+
+jpc_obj.main();
+
+
+function ok_single_data()
+{
+	jpc_obj.return_value(0);
+	my_set_focus();
+	self.close();
+}
+
+function ok_selected_data()
+{
+	var index = document.forms[0].elements['address'].selectedIndex;
+	// alert(index);
+	jpc_obj.return_value(index);
+
+	my_set_focus();
+	self.close();
+}
+
+function my_set_focus()
+{
+	if ( window.opener.my_set_focus ) {
+		window.opener.my_set_focus();
+	}
+}
+
+// -->
+</script>
+
+</head>
+<!-- 
+/*------------------------------------------------------------
+ * ページ上部
+ *------------------------------------------------------------*/
+ -->
+<body>
+<form>
+<h1>検索結果</h1>
+
+郵便番号 <script>document.write(jpc_obj.POSTCODE);</script><br>
+<br>
+
+検索結果 <script>document.write(jpc_obj.COUNT);</script> 件<br>
+<br>
+
+<script>
+if ( jpc_obj.WARNING_RAW_KANJI )
+{
+  document.write('<' + 'b' + '>');
+  document.write('お使いのブラウザでは検索結果が文字化けしている可能性があります。');
+  document.write('文字化けしている場合このウィンドウを閉じてから手動で入力してください。');
+  document.write('<' + '/b' + '>');
+  document.write('<' + 'br' + '>');
+  document.write('<' + 'br' + '>');
+}
+</script>
+
+<!-- 
+/*------------------------------------------------------------
+ * ページ中央
+ *------------------------------------------------------------*/
+ -->
+<script>
+<!-- 
+// １件も見つからなかった場合の[閉じる]ボタンの表示文字列
+var CLOSE_BUTTON  = "閉じる";
+
+// 見つかった場合の[OK]ボタンと[CANCEL]ボタンの表示文字列
+var OK_BUTTON     = "　ＯＫ　";
+var CANCEL_BUTTON = "キャンセル";
+
+switch ( jpc_obj.VIEW_TYPE )
+{
+case 0:
+	// エラー表示
+	//////////////////////////////////////////////////
+	document.write(
+		'<' + 'font color=red>' + jpc_obj.ERROR_MESSAGE + '<' + '/font>' + '<br>' + 
+		'<' + 'div align=center><' + 'input type=button value="' + CLOSE_BUTTON + '" onclick="self.close();"><' + '/div>'
+		);
+	//////////////////////////////////////////////////
+	break;
+	
+case 1:
+	// 候補が１個の場合
+	//////////////////////////////////////////////////
+	document.write('<' + 'b>' + jpc_obj.ADDRESS_TEXT[0] + '<' + '/b>' + '<' + 'br>');
+	
+	document.write(
+		'<' + 'br>' + 
+		'<' + 'div align=center>' +
+		'<' + 'input type=button value="' + OK_BUTTON     + '" onclick="ok_single_data();">' +
+		'<' + 'input type=button value="' + CANCEL_BUTTON + '" onclick="self.close();">' +
+		'<' + '/div>'
+		);
+	//////////////////////////////////////////////////
+	break;
+
+case 2:
+	// 候補が２個以上ある場合
+	//////////////////////////////////////////////////
+	document.write('<' + 'select name=address>');
+	
+	for (var i = 0; i < jpc_obj.ADDRESS_VALUE.length; ++i)
+	{
+		document.write('<' + 'option value="' + jpc_obj.ADDRESS_VALUE[i] + '">' + jpc_obj.ADDRESS_TEXT[i] + "\n");
+	}
+	document.write('<' + '/select>');
+	
+	document.write(
+		'<'	+ 'br>' +
+		'<' + 'br>' + 
+		'<' + 'div align=center>' +
+		'<' + 'input type=button value="' + OK_BUTTON     + '" onclick="ok_selected_data();">' +
+		'<' + 'input type=button value="' + CANCEL_BUTTON + '" onclick="self.close();">' +
+		'<' + '/div>'
+		);
+	//////////////////////////////////////////////////
+	break;
+
+case 3:
+	// エラー表示後、ただちに親ウィンドウへ戻る
+	alert( jpc_obj.POSTCODE + "\n" + jpc_obj.ERROR_MESSAGE );
+	self.close();
+	break;
+
+case 4:
+	// 先頭候補を返し、ただちに親ウィンドウへ戻る
+	jpc_obj.return_value(0);
+	self.close();
+	break;
+}
+// -->
+</script>
+
+
+<!-- 
+/*------------------------------------------------------------
+ * ページ下部
+ * MW Web StudioのCopyrightは削除してもかまいません
+ *------------------------------------------------------------*/
+ -->
+<hr>
+<div align=right>J-POSTAL, Copyright (c) 2003-2014 Ninton G.K.</div>
+
+</form>
+</body></html>

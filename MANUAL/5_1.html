@@ -1,0 +1,42 @@
+<html lang=ja><head>
+<meta http-equiv="Content-type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head><body><div align=center><table border=0 width=580><tr><td>
+<p><A href="index.html">J-POSTALトップ</A></p>
+
+<H2>jpostal_convert.hta</H2>
+<P>郵政公社のKEN_ALL.CSV、JIGYOSYO.CSVから、J-POSTAL用郵便データファイルを作成します。</P>
+<P>Windows用HTMLアプリケーションが動作すること、および、ActivePerl(Windows用Perl)が必要です。<BR>動作確認環境は、Windows98SE、WindowsXP 
+Pro SP1 です。</P>
+<P><IMG height=448 alt="" src="images/5_1_1.gif" width=320></P>
+<P><BR>使用方法</P>
+<OL>
+  <LI>郵政公社データのダウンロードと解凍<BR>郵政公社のホームページから、都道府県データの全国一括(ken_all.lzh)と大口事業所の最新全データ(jigyosyo.lzh)をダウンロードし、解凍します。解凍ファイルは、D:\jpostal_20030610\の下に保存したとします。<BR>[<STRONG>利用者名</STRONG>]欄に会社名または個人名を入力します。データ中に埋め込まれます。不正利用追跡の参考にしますので、ご協力お願いします。 
+
+  <LI>[<STRONG>全国一括ファイル</STRONG>]欄の[参照]ボタンを押し、D:\jpostal_20030610\KEN_ALL.CSV 
+  を選択します。 
+  <LI>[<STRONG>大口事業所ファイル</STRONG>]欄の[参照]ボタンを押し、D:\jpostal_20030610\JIGYOSYO.CSV 
+  を選択します。 
+  <LI>その他の項目は、MW Web Studio開発用です。変更する必要はありません。 
+  <LI>[<STRONG>実行</STRONG>]ボタンを押します。 <BR>MS-DOSプロンプトが開き、処理の経過が表示されます。<BR><IMG height=230 alt="" src="images/5_1_2.gif" width=320> 
+  <LI>MS-DOSプロンプトに「compelete. hit any 
+  key」と表示されたら、処理完了です。何かキーを押してください。MS-DOSプロンプトが閉じます。<BR>※処理時間の参考、Windows XP Pro + 
+  Athron XP 1700 で、64秒です。<BR><IMG height=230 alt="" src="images/5_1_3.gif" width=320> 
+  <LI>J-POSTAL用の郵便データファイルは、D:\jpostal_20030610\datajs\*.js 
+  です。datacsv\*.csvはフォルダごと削除してかまいません。</LI></OL>
+<P>実行前のファイル構成<BR>　　D:\jpostal_20030610\<BR>　　　　<STRONG>KEN_ALL.CSV</STRONG><BR>　　　　<STRONG>JIGYOSYO.CSV</STRONG><BR><BR>実行後のファイル構成<BR>　　D:\jpostal_20030610\<BR>　　　　KEN_ALL.CSV<BR>　　　　JIGYOSYO.CSV<BR><BR>　　　　<STRONG>datacsv\</STRONG>　　　　　　　datacsvフォルダごと削除できます。<BR>　　　　　　001.csv<BR>　　　　　　002.csv<BR>　　　　　　...<BR>　　　　　　999.csv<BR><BR>　　　　<STRONG>datajs\</STRONG>　　　　　　　　J-POSTAL用の郵便データファイル<BR>　　　　　　001.csv<BR>　　　　　　002.csv<BR>　　　　　　...<BR>　　　　　　999.csv<BR></P>
+
+
+
+<p><A href="index.html">J-POSTALトップ</A></p>
+<hr>
+
+<div class=footer
+>Copyright &copy; 1999-2014 Ninton G.K. , All rights reserved.<br
+></div>
+
+</td></tr></table>
+
+
+</div></body></html>

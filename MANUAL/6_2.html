@@ -1,0 +1,293 @@
+<html lang=ja><head>
+<meta http-equiv="Content-type" content="text/html; charset=Shift_JIS">
+<title>J-POSTAL</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head><body><div align=center><table border=0 width=580><tr><td>
+<p><A href="index.html">J-POSTALトップ</A></p>
+
+<H2>JPOSTAL_CHILD_O</H2>
+<P>子ウィンドウ用のオブジェクト </P>
+<H2>説明</H2>
+<P>new <B>JPOSTAL_CHILD_O</B>();<BR><BR></P>
+<P>プロパティ、メソッドの例では、JPOSTAL_CHILD_Oオブジェクトの変数名は jpc_obj として説明します。 </P>
+<H4>プロパティ</H4>
+<P>全てのプロパティはリードオンリーです。値を設定した場合の動作は不定です。 </P>
+<TABLE cellSpacing=0 cellPadding=5 border=1>
+  <TBODY>
+  <TR>
+    <TH>名称</TH>
+    <TH>説明</TH></TR>
+  <TR>
+    <TD>COUNT </TD>
+    <TD>郵便番号に一致した住所の件数<BR><BR>例 <PRE>検索結果 &lt;script&gt;document.write(jpc_obj.COUNT);&lt;/script&gt; 件<BR>
+<BR>
+</PRE><BR>表示結果 <PRE>検索結果 13 件
+</PRE></TD></TR>
+  <TR>
+    <TD>ADDRESS_TEXT </TD>
+    <TD>住所の表示用配列。親ウィンドウで指定された子ウィンドウ住所表示書式(JPOSTAL_PARENT_OのFORMATプロパティ)で整形済みです。 
+    </TD></TR>
+  <TR>
+    <TD>ADDRESS_VALUE </TD>
+    <TD>住所データ配列。親ウィンドウに返すデータです。 <BR><BR>例 候補が１件なので、SELECTタグを使わない例 <PRE>&lt;script&gt;
+document.write('&lt;' + 'b&gt;' + jpc_obj.ADDRESS_TEXT[0] + '&lt;' + '/b&gt;' + '&lt;' + 'br&gt;');
+&lt;/script&gt;
+</PRE><BR>例 SELECTタグを使う例 <PRE>&lt;script&gt;
+document.write('&lt;' + 'select name=address&gt;');
+for (var i = 0; i &lt; jpc_obj.ADDRESS_VALUE.length; ++i)
+{
+    document.write('&lt;' + 'option value="' + jpc_obj.ADDRESS_VALUE[i] + '"&gt;' + jpc_obj.ADDRESS_TEXT[i] + "\n");
+}
+document.write('&lt;' + '/select&gt;');
+&lt;/script&gt;
+</PRE></TD></TR>
+  <TR>
+    <TD>ERROR_MESSAGE </TD>
+    <TD>エラーメッセージ<BR><BR>例 赤字でエラーメッセージを表示します <PRE>&lt;script&gt;
+document.write('&lt;' + 'font color=red&gt;' + jpc_obj.ERROR_MESSAGE + '&lt;' + '/font&gt;');
+&lt;/script&gt;
+</PRE><BR>表示結果 <PRE><FONT color=red>郵便番号が見つかりませんでした</FONT>
+</PRE></TD></TR>
+  <TR>
+    <TD>ERROR </TD>
+    <TD>エラー番号 
+      <TABLE cellSpacing=0 border=1>
+        <TBODY>
+        <TR>
+          <TD>エラー番号</TD>
+          <TD>エラーメッセージ</TD></TR>
+        <TR>
+          <TD>0 </TD>
+          <TD>正常</TD></TR>
+        <TR>
+          <TD>1 </TD>
+          <TD>郵便番号が見つかりませんでした</TD></TR>
+        <TR>
+          <TD>2 </TD>
+          <TD>郵便番号に数字以外の文字があります</TD></TR>
+        <TR>
+          <TD>3 </TD>
+          <TD>郵便番号が３桁未満です</TD></TR>
+        <TR>
+          <TD>4 </TD>
+          <TD>郵便番号が７桁を超えています</TD></TR>
+        <TR>
+          <TD>5 </TD>
+          <TD>郵便データファイルが見つかりません</TD></TR>
+        <TR>
+          <TD>6 </TD>
+          <TD>検索結果が？件を超えました。</TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD>POSTCODE </TD>
+    <TD>郵便番号<BR>全角数字を半角数字へ変換し、半角数字とハイフン以外は削除済みです。 <BR><BR>例 <PRE>郵便番号 &lt;script&gt;document.write(jpc_obj.POSTCODE);&lt;/script&gt;</PRE>表示結果 
+<PRE>郵便番号 100
+</PRE></TD></TR>
+  <TR>
+    <TD>VIEW_TYPE </TD>
+    <TD>ページの表示方法<BR>検索結果と AUTO_RETURN_TYPE から、ページ表示方法が決定されます。<BR><BR>
+      <TABLE cellSpacing=0 border=1>
+        <TBODY>
+        <TR>
+          <TD>0 </TD>
+          <TD>子ウィンドウにエラー表示する</TD></TR>
+        <TR>
+          <TD>1 </TD>
+          <TD>検索結果は１件で、子ウィンドウに表示する</TD></TR>
+        <TR>
+          <TD>2 </TD>
+          <TD>検索結果は２件以上あり、子ウィンドウに表示する</TD></TR>
+        <TR>
+          <TD>3 </TD>
+          <TD>エラーを表示し、その後ただちに親ウィンドウに戻る</TD></TR>
+        <TR>
+          <TD>4 </TD>
+          <TD>検索結果の先頭候補を選び、ただちに親ウィンドウに戻る</TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD>WARNING_RAW_KANJI</TD>
+    <TD>外部JavaScriptファイルの生(エンコードしていない)で記述した漢字文字列が、文字化けする可能性があることを示します。<BR>Mac版IE4.x向けの対策として、このプロパティを判定して、「文字化けする可能性があります」旨の表示をします。<BR><BR>1: 
+      文字化けの可能性があります。<BR>0: 正しく表示できます。</TD></TR></TBODY></TABLE>
+<H4>メソッド</H4>
+<TABLE cellSpacing=0 cellPadding=5 border=1>
+  <TBODY>
+  <TR>
+    <TH>名称</TH>
+    <TH>説明</TH></TR>
+  <TR>
+    <TD>get_arguments</TD>
+    <TD><I>object</I>.<B>get_arguments</B>()<BR><BR>URLのクエリー文字列を解析し、親ウィンドウから渡された引数を取得します。 
+      <BR></TD></TR>
+  <TR>
+    <TD>include</TD>
+    <TD><I>object</I>.<B>include</B>(string 
+      i_script_src)<BR><BR><B>include</B>メソッドは、引数 
+      i_script_srcで指定されたURLから、郵便データ用JavaScriptファイルを読み込みます。相対URL、絶対URLどちらも指定できます。<BR><BR>指定したURLにファイルが存在しない場合、後の住所検索処理(JPOSTAL_CHILD_O.main())で「郵便番号が見つからない」エラーになります。<BR><BR>引数 
+      i_script_srcには次の書式指定子を記述できます。これらの書式指定子は該当する値で置き換えられます。<BR><BR>　%p　郵便番号の先頭３桁<BR>　%q　クエリー文字列 
+      (CGI版用に予約)<BR><BR><B>注意</B><BR><FONT 
+      color=red>includeメソッドを呼んだ直後に&lt;/script&gt;で閉じてください。</FONT> 
+      本メソッドの内部処理でdocument.write( "&lt;script 
+      src="<I>i_script_src</I>"&gt;&lt;/script&gt;" 
+      )を実行しています。本関数呼出し後&lt;/script&gt;で閉じると、Webブラウザのスクリプト処理系が、&lt;script 
+      src="<I>i_script_src</I>"&gt;&lt;/script&gt; 
+      を実行します。つまり指定URLのJavaScriptファイル(＝郵便データが記述されている)が読み込まれます。 </TD></TR>
+  <TR>
+    <TD>judge_raw_kanji</TD>
+    <TD><EM>object</EM>.<B>judge_raw_kanji</B>(<STRONG>'あいうえお'</STRONG>)<BR><BR>引数には必ず、<STRONG>'あいうえお'</STRONG> 
+      と指定します。HTMLファイルの&lt;SCRIPT&gt;タグで記述します。外部スクリプトファイルに記述してはいけません。<BR><BR>この判定結果は、プロパティ 
+      WARNING_RAW_KANJI に反映します。<BR></TD></TR>
+  <TR>
+    <TD>main</TD>
+    <TD><I>object</I>.<B>main</B>()<BR><BR>郵便番号から住所を検索し、ページ表示用の各種プロパティを設定します。 
+      <BR></TD></TR>
+  <TR>
+    <TD>return_value</TD>
+    <TD><I>object</I>.<B>return_value</B>(i_address_index)<BR><BR>親ウィンドウに住所を返します。引数 
+      i_address_indexには、プロパティADDRESS_VALUE配列の添え字を指定します。<BR>このメソッドは子ウィンドウを閉じません。別途 
+      self.close() を呼んでください。 <BR><BR>例1 先頭候補を返す場合 <PRE>jpc_obj.return_value(0);
+self.close();
+</PRE><BR>例2 SELECTタグで選択された候補を返す場合 <PRE>jpc_obj.return_value(document.forms[0].elements['address'].selectedIndex);
+self.close();</PRE></TD></TR></TBODY></TABLE>
+<H3>必要なファイル</H3>
+<P>mwlib.js<BR>jpostal.js<BR>jpostal_child.js<BR></P>
+<H3>例1 jpostal_child.html</H3><PRE>&lt;script src="../mwlib.js"        &gt;&lt;/script&gt;
+&lt;script src="../jpostal.js"      &gt;&lt;/script&gt;
+&lt;script src="../jpostal_child.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+&lt;!-- 
+var jpc_obj;
+
+jpc_obj = new JPOSTAL_CHILD_O();
+jpc_obj.get_arguments();
+jpc_obj.include_data('../datajs/%p.js');
+// --&gt;
+&lt;/script&gt;&lt;script&gt;
+&lt;!-- 
+
+jpc_obj.main();
+
+
+function ok_single_data()
+{
+  jpc_obj.return_value(0);
+  self.close();
+}
+
+function ok_selected_data()
+{
+  var index = document.forms[0].elements['address'].selectedIndex;
+  // alert(index);
+  jpc_obj.return_value(index);
+  self.close();
+}
+// --&gt;
+&lt;/script&gt;
+
+&lt;/head&gt;&lt;body"&gt;
+&lt;form&gt;
+&lt;!-- 
+/*------------------------------------------------------------
+ * ページ上部
+ *------------------------------------------------------------*/
+ --&gt;
+&lt;h1&gt;検索結果&lt;/h1&gt;
+
+郵便番号 &lt;script&gt;document.write(jpc_obj.POSTCODE);&lt;/script&gt;&lt;br&gt;
+&lt;br&gt;
+
+検索結果 &lt;script&gt;document.write(jpc_obj.COUNT);&lt;/script&gt; 件&lt;br&gt;
+&lt;br&gt;
+
+
+&lt;script&gt;
+&lt;!-- 
+/*------------------------------------------------------------
+ * ページ中央
+ *------------------------------------------------------------*/
+switch ( jpc_obj.VIEW_TYPE )
+{
+case 0:
+  // エラー表示
+  //////////////////////////////////////////////////
+  document.write(
+    '&lt;' + 'font color=red&gt;' + jpc_obj.ERROR_MESSAGE + '&lt;' + '/font&gt;' + '&lt;br&gt;' + 
+    '&lt;' + 'div align=center&gt;&lt;' + 'input type=button value="閉じる" onclick="self.close();"&gt;&lt;' + '/div&gt;'
+    );
+  //////////////////////////////////////////////////
+  break;
+  
+case 1:
+  // 候補が１個の場合
+  //////////////////////////////////////////////////
+  document.write('&lt;' + 'b&gt;' + jpc_obj.ADDRESS_TEXT[0] + '&lt;' + '/b&gt;' + '&lt;' + 'br&gt;');
+  
+  document.write(
+    '&lt;' + 'br&gt;' + 
+    '&lt;' + 'div align=center&gt;' +
+    '&lt;' + 'input type=button value="　ＯＫ　"   onclick="ok_single_data();"&gt;' +
+    '&lt;' + 'input type=button value="キャンセル" onclick="self.close();"&gt;' +
+    '&lt;' + '/div&gt;'
+    );
+  //////////////////////////////////////////////////
+  break;
+
+case 2:
+  // 候補が２個以上ある場合
+  //////////////////////////////////////////////////
+  document.write('&lt;' + 'select name=address&gt;');
+  
+  for (var i = 0; i &lt; jpc_obj.ADDRESS_VALUE.length; ++i)
+  {
+    document.write('&lt;' + 'option value="' + jpc_obj.ADDRESS_VALUE[i] + '"&gt;' + jpc_obj.ADDRESS_TEXT[i] + "\n");
+  }
+  document.write('&lt;' + '/select&gt;');
+  
+  document.write(
+    '&lt;'  + 'br&gt;' +
+    '&lt;' + 'br&gt;' + 
+    '&lt;' + 'div align=center&gt;' +
+    '&lt;' + 'input type=button value="　ＯＫ　"   onclick="ok_selected_data();"&gt;' +
+    '&lt;' + 'input type=button value="キャンセル" onclick="self.close();"&gt;' +
+    '&lt;' + '/div&gt;'
+    );
+  //////////////////////////////////////////////////
+  break;
+
+case 3:
+  // エラー表示後、ただちに親ウィンドウへ戻る
+  alert( jpc_obj.POSTCODE + "\n" + jpc_obj.ERROR_MESSAGE );
+  self.close();
+  break;
+
+case 4:
+  // 先頭候補を返し、ただちに親ウィンドウへ戻る
+  jpc_obj.return_value(0);
+  self.close();
+  break;
+}
+// --&gt;
+&lt;/script&gt;
+
+
+&lt;!-- 
+/*------------------------------------------------------------
+ * ページ下部
+ *------------------------------------------------------------*/
+ --&gt;
+&lt;hr&gt;
+&lt;div align=right&gt;J-POSTAL, Copyright (c) 2003 MW Web Studio&lt;/div&gt;
+
+&lt;/form&gt;
+&lt;/body&gt;&lt;/html&gt;</PRE>
+
+
+
+<p><A href="index.html">J-POSTALトップ</A></p>
+<hr>
+
+<div class=footer
+>Copyright &copy; 1999-2014 Ninton G.K. , All rights reserved.<br
+></div>
+
+</td></tr></table>
+
+
+</div></body></html>
