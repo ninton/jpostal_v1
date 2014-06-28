@@ -2,8 +2,6 @@ function JPOSTAL_datajs(){
 var a = new Array();
 //VERSION: 1.5
 //USER_NAME: Ninton G.K.
-//SRC_DATE: 2014/05/26 13:47:22
-//DST_DATE: 2014/06/29 03:13:39
 a[0]='0560000,–kŠC“¹,“ú‚ŒSV‚Ð‚¾‚©’¬,,,,,,,,,';
 a[1]='0560001,–kŠC“¹,“ú‚ŒSV‚Ð‚¾‚©’¬,Ã“à–Ú–¼,,,,,,,,';
 a[2]='0560002,–kŠC“¹,“ú‚ŒSV‚Ð‚¾‚©’¬,Ã“à_X,,,,,,,,';
