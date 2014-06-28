@@ -1,9 +1,9 @@
 function JPOSTAL_datajs(){
 var a = new Array();
 //VERSION: 1.5
-//USER_NAME: MW Web Studio
-//SRC_DATE: 2013/12/24 15:55:12
-//DST_DATE: 2014/01/29 14:14:43
+//USER_NAME: Ninton G.K.
+//SRC_DATE: 2014/05/26 13:47:22
+//DST_DATE: 2014/06/29 03:13:39
 a[0]='0540000,–kŠC“¹,—E•¥ŒS‚Þ‚©‚í’¬,,,,,,,,,';
 a[1]='0540001,–kŠC“¹,—E•¥ŒS‚Þ‚©‚í’¬,ˆ®‰ª,,,,,,,,';
 a[2]='0540002,–kŠC“¹,—E•¥ŒS‚Þ‚©‚í’¬,t“ú,,,,,,,,';
@@ -42,4 +42,5 @@ a[34]='0540361,–kŠC“¹,—E•¥ŒS‚Þ‚©‚í’¬,•ä•Ê•ŸŽR,,,,,,,,';
 a[35]='0540362,–kŠC“¹,—E•¥ŒS‚Þ‚©‚í’¬,•ä•ÊˆÀZ,,,,,,,,';
 a[36]='0540363,–kŠC“¹,—E•¥ŒS‚Þ‚©‚í’¬,•ä•Ê•½‹u,,,,,,,,';
 a[37]='0540364,–kŠC“¹,—E•¥ŒS‚Þ‚©‚í’¬,•ä•Ê•x“à,,,,,,,,';
+a[38]='0548660,–kŠC“¹,—E•¥ŒS‚Þ‚©‚í’¬,”üK,‚Q’š–Ú‚W‚W”Ô’ni–·ì—X•Ö‹ÇŽ„‘” ‘æ‚T†j,‚Þ‚©‚í’¬–ðê,,,,,,';
 return a; }

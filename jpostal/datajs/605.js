@@ -1,9 +1,9 @@
 function JPOSTAL_datajs(){
 var a = new Array();
 //VERSION: 1.5
-//USER_NAME: MW Web Studio
-//SRC_DATE: 2013/12/24 15:55:12
-//DST_DATE: 2014/01/29 14:14:43
+//USER_NAME: Ninton G.K.
+//SRC_DATE: 2014/05/26 13:47:22
+//DST_DATE: 2014/06/29 03:13:39
 a[0]='6050000,‹ž“s•{,‹ž“sŽs“ŒŽR‹æ,,,,,,,,,';
 a[1]='6050001,‹ž“s•{,‹ž“sŽs“ŒŽR‹æ,“ñ’¬–Ú,,,,,,,,';
 a[2]='6050002,‹ž“s•{,‹ž“sŽs“ŒŽR‹æ,‹³‹Æ’¬,,,,,,,,';
@@ -214,4 +214,7 @@ a[206]='6050992,‹ž“s•{,‹ž“sŽs“ŒŽR‹æ,‰º–x‹l’¬,,,,,,,,';
 a[207]='6050993,‹ž“s•{,‹ž“sŽs“ŒŽR‹æ,“ú‹g’¬,,,,,,,,';
 a[208]='6050994,‹ž“s•{,‹ž“sŽs“ŒŽR‹æ,ˆê‹´‹{ƒm“à’¬,,,,,,,,';
 a[209]='6050995,‹ž“s•{,‹ž“sŽs“ŒŽR‹æ,ˆê‹´–ì–{’¬,,,,,,,,';
+a[210]='6058501,‹ž“s•{,‹ž“sŽs“ŒŽR‹æ,¡ŒF–ì–k“ú‹g’¬,‚R‚T,ŠwZ–@l@‹ž“s—ŽqŠw‰€i‹ž“s—Žq‘åŠwE‹ž“s—Žq’ZŠú‘åŠw•”E‹ž“s—Žq‚“™ŠwZE‹ž“s—Žq’†ŠwZE‹ž“s—Žq‘åŠw•‘®¬ŠwZE‹ž“s—c’t‰€j,,,,,,';
+a[211]='6058511,‹ž“s•{,‹ž“sŽs“ŒŽR‹æ,´…‚T’š–Ú,‚P‚R‚O”Ô’n‚Ì‚U,“ŒŽR‹æ–ðŠ,,,,,,';
+a[212]='6058686,‹ž“s•{,‹ž“sŽs“ŒŽR‹æ,—Ñ‰º’¬,‚S‚O‚O,@‹³–@l@’m‰¶‰@,,,,,,';
 return a; }

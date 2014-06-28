@@ -1,9 +1,9 @@
 function JPOSTAL_datajs(){
 var a = new Array();
 //VERSION: 1.5
-//USER_NAME: MW Web Studio
-//SRC_DATE: 2013/12/24 15:55:12
-//DST_DATE: 2014/01/29 14:14:43
+//USER_NAME: Ninton G.K.
+//SRC_DATE: 2014/05/26 13:47:22
+//DST_DATE: 2014/06/29 03:13:39
 a[0]='9718101,•Ÿ“‡Œ§,‚¢‚í‚«Žs,¬–¼•l,,,,,,,,';
 a[1]='9718102,•Ÿ“‡Œ§,‚¢‚í‚«Žs,¬–¼•l`ƒP‹u,,,,,,,,';
 a[2]='9718111,•Ÿ“‡Œ§,‚¢‚í‚«Žs,¬–¼•l‘åŒ´,,,,,,,,';
