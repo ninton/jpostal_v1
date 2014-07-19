@@ -9,17 +9,49 @@ Copyright (c) 2003-2014 Aoki Makoto Ninton G.K. http://www.ninton.co.jp
 <title>J-POSTAL</title>
 
 <script src="mwlib.js"        ></script>
-<script src="jpostal.js"       language="JavaScript"></script>
-<script src="jpostal_child.js" language="JavaScript"></script>
+<script src="jpostal.js"       type="text/javascript"></script>
+<script src="jpostal_child.js" type="text/javascript"></script>
 <script>
 <!-- 
 var jpc_obj;
 jpc_obj = new JPOSTAL_CHILD_O();
 jpc_obj.judge_raw_kanji('‚ ‚¢‚¤‚¦‚¨');
 jpc_obj.get_arguments();
-jpc_obj.include('./datajs/%p.js');
+//jpc_obj.include('./datajs/%p.js');
 // -->
-</script><script>
+</script>
+
+<script type="text/javascript" src="//jpostal.googlecode.com/svn/trunk/jquery.jpostal.js"></script>
+<script type="text/javascript">
+// jquery.jpostal.js—p json
+jpc_obj.include('//jpostal.googlecode.com/svn/trunk/json/%p.json');
+
+var g_data_arr;
+function jQuery_jpostal_callback( i_data ) {
+	console.log( 'jQuery_jpostal_callback' );
+	g_data_arr = i_data;
+}
+
+function JPOSTAL_datajs(){
+	var	data_arr = [];
+	
+	console.log( g_data_arr.length );
+	
+	for ( var i = 0; i < g_data_arr.length; ++i ) {
+		var data = g_data_arr[i];
+		
+		if ( data[0].length == 8 ) {
+			data[0] = data[0].substr(1);
+			data_arr.push( data.join(',') );
+		}
+	}
+	console.log( data_arr.length );
+	return data_arr;
+}
+// -->
+</script>
+
+<script type="text/javascript">
 <!-- 
 
 jpc_obj.main();
